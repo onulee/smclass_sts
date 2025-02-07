@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- dao Interface파일 위치  -->
+<mapper namespace="com.java.dao.BoardMapper"> 
+  <select id="blist" resultType="com.java.dto.BoardDto">
+     select * from board
+  </select>
+  
+  
+</mapper>
