@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 	<head>
+	
 		<meta charset="UTF-8">
 		<title>메인페이지</title>
 		<script>
