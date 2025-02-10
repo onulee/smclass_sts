@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.BoardMapper">
+  <!-- 게시글 전체리스트 -->
+  <select id="selectAll" resultType="com.java.dto.BoardDto">
+    select * from board order by bno desc
+  </select>
+  <!-- 1개 게시글 가져오기 -->
+  <select id="selectOne" resultType="com.java.dto.BoardDto">
+    select * from board where bno=#{bno}
+  </select>
+  <!-- 조회수 1증가 -->
+  <update id="updateBhit">
+     update board set bhit=bhit+1 where bno=#{bno}
+  </update>
+  
+  <!-- 글쓰기 저장 -->
+  <insert id="insertBoard">
+    insert into board values (
+		board_seq.nextval,#{btitle},#{bcontent},#{id},
+		board_seq.currval,0,0,0,sysdate
+	)
+  </insert>
+  
+  <!-- 글쓰기 삭제 -->
+  <delete id="deleteBoard">
+     delete board where bno=#{bno}
+  </delete>
+  
+  
+  
+  
+  
+  
+  
+  
+</mapper>
