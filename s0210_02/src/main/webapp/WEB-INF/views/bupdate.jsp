@@ -24,6 +24,7 @@
 
     <form action="bupdate" name="bupdateFrm" method="post">
       <table>
+      <input type="hidden" name="page" value="${page}">
       <input type="hidden" name="bno" value="${bdto.bno}">
         <colgroup>
           <col width="15%">

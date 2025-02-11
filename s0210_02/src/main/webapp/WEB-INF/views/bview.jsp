@@ -12,10 +12,10 @@
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/read.css">
   <script>
-    const deleteBtn = (bno) => {
+    const deleteBtn = (bno,page) => {
     	if(confirm(bno+"번 게시글을 삭제하시겠습니까?")){
     		alert("게시글이 삭제되었습니다.");
-    		location.href="/board/bdelete?bno=${bdto.bno}";
+    		location.href="/board/bdelete?bno=${bdto.bno}&page=${page}";
     	}
     }
   </script>
@@ -46,17 +46,27 @@
         <td colspan="3" class="article">${bdto.bcontent }</td>
       </tr>
       <tr>
-        <td colspan="3"><strong>다음글</strong> <span class="separator">|</span> ${ndto.btitle }</td>
+        <td colspan="3"><strong>다음글</strong> <span class="separator">|</span> 
+        <c:if test="${ndto != null }">
+        <a href="/board/bview?bno=${ndto.bno}">${ndto.btitle }</a>
+        </c:if>
+        <c:if test="${ndto == null }">다음글이 없습니다.</c:if>
+        </td>
       </tr>
       <tr>
-        <td colspan="3"><strong>이전글</strong> <span class="separator">|</span> ${pdto.btitle}</td>
+        <td colspan="3"><strong>이전글</strong> <span class="separator">|</span> 
+        <c:if test="${pdto != null }">
+        <a href="/board/bview?bno=${pdto.bno}">${pdto.btitle}</a>
+        </c:if>
+        <c:if test="${pdto == null }">다음글이 없습니다.</c:if>
+        </td>
       </tr>
     </table>
 
-    <a href="/board/blist"><div class="list">목록</div></a>
-    <a onclick="deleteBtn(${bdto.bno})"><div class="list">삭제</div></a>
-    <a href="/board/bupdate?bno=${bdto.bno}"><div class="list">수정</div></a>
-    <a href="/board/breply?bno=${bdto.bno}"><div class="list">답변달기</div></a>
+    <a href="/board/blist?page=${page}"><div class="list">목록</div></a>
+    <a onclick="deleteBtn(${bdto.bno},${page})"><div class="list">삭제</div></a>
+    <a href="/board/bupdate?bno=${bdto.bno}&page=${page}"><div class="list">수정</div></a>
+    <a href="/board/breply?bno=${bdto.bno}&page=${page}"><div class="list">답변달기</div></a>
   </section>
 </body>
 </html>

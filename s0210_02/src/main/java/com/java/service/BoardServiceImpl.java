@@ -16,11 +16,39 @@ import com.java.dto.BoardDto;
 public class BoardServiceImpl implements BoardService {
 
 	@Autowired BoardMapper boardMapper;
+	int rowPerPage = 10; //한페이지당 게시글 수
+	
 	
 	@Override //게시글 전체리스트
-	public ArrayList<BoardDto> blist() {
-		ArrayList<BoardDto> list = boardMapper.selectAll();
-		return list;
+	public Map<String, Object> blist(int page, String category, String searchW) {
+		
+		//게시글 전체개수, 검색어 전체개수
+		int count = boardMapper.countAll(category,searchW);
+		
+		// 마지막 페이지 넘버링
+		int maxpage = (int) Math.ceil((double)count/rowPerPage); 
+		// 첫번째 번호 넘버링
+		int startpage = (int)((page-1)/10)*10+1;
+		// 마지막 번호 넘버링
+		int endpage = startpage+10-1;
+		if(endpage>maxpage) endpage = maxpage;
+		
+		//요청페이지별 검색번호
+		int startrow = (page-1)*rowPerPage+1; // 4페이지   (4-1)*10+1=31
+		int endrow = startrow+rowPerPage-1;   //          31+10-1 = 40
+		
+		// 전체리스트 - 시작번호,끝번호,카테고리,검색어
+		ArrayList<BoardDto> list = boardMapper.selectAll(startrow,endrow,category,searchW);
+		
+		//리턴타입 map
+		Map<String, Object> map = new HashMap<>();
+		map.put("page", page);
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		map.put("maxpage", maxpage);
+		map.put("list", list);
+		
+		return map;
 	}
 
 	@Override //글쓰기 저장
@@ -45,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
 		map.put("prevDto", prevDto);
 		map.put("nextDto", nextDto);
 		
-		System.out.println("prevDto 이전게시글 : "+prevDto.getBno());
+		//System.out.println("prevDto 이전게시글 : "+prevDto.getBno());
 		return map;
 	}
 

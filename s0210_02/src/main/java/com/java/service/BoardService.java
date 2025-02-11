@@ -7,8 +7,8 @@ import com.java.dto.BoardDto;
 
 public interface BoardService {
 
-	//게시글 전체리스트
-	ArrayList<BoardDto> blist();
+	//게시글 전체리스트, 검색어 포함
+	Map<String, Object> blist(int page, String category, String searchW);
 	//글쓰기 저장
 	void bwrite(BoardDto bdto);
 	//1개 게시글 가져오기

@@ -5,8 +5,29 @@
 <mapper namespace="com.java.dao.BoardMapper">
   <!-- 게시글 전체리스트 -->
   <select id="selectAll" resultType="com.java.dto.BoardDto">
-    select * from board order by bgroup desc, bstep asc
+    select * from ( select row_number() over (
+	order by bgroup desc,bstep asc) rnum, 
+	a.* from board a 
+    <if test="category == 'btitle' or category == 'bcontent'">
+       where $(category) like '%'||#{searchW}||'%'
+    </if>	
+    <if test="category == 'all'">
+       where btitle like '%'||#{searchW}||'%' or bcontent like '%'||#{searchW}||'%'
+    </if>
+	) 
+	where rnum between #{startrow} and #{endrow}
   </select>
+  <select id="countAll" resultType="int">
+    select count(*) from board
+    <if test="category == 'btitle' or category == 'bcontent'">
+       where $(category) like '%'||#{searchW}||'%'
+    </if>	
+    <if test="category == 'all'">
+       where btitle like '%'||#{searchW}||'%' or bcontent like '%'||#{searchW}||'%'
+    </if>
+  </select>
+  
+  
   <!-- 1개 게시글 가져오기 -->
   <select id="selectOne" resultType="com.java.dto.BoardDto">
     select * from board where bno=#{bno}
@@ -29,6 +50,7 @@
 	from board ) where bno=#{bno}
 	)
   </select>
+  
   
   
   <!-- 조회수 1증가 -->
@@ -66,8 +88,9 @@
 		board_seq.nextval,#{btitle},#{bcontent},#{id},
 		#{bgroup},#{bstep}+1,#{bindent}+1,0,sysdate
 	 ) 
-  
   </insert>
+  
+  
   
   
   
