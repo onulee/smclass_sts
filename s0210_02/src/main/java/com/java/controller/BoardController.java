@@ -92,6 +92,8 @@ public class BoardController {
 		model.addAttribute("startpage",map.get("startpage"));
 		model.addAttribute("endpage",map.get("endpage"));
 		model.addAttribute("maxpage",map.get("maxpage"));
+		model.addAttribute("category",map.get("category"));
+		model.addAttribute("searchW",map.get("searchW"));
 		return "blist";
 	}
 	

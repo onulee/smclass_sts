@@ -47,6 +47,8 @@ public class BoardServiceImpl implements BoardService {
 		map.put("endpage", endpage);
 		map.put("maxpage", maxpage);
 		map.put("list", list);
+		map.put("category", category);
+		map.put("searchW", searchW);
 		
 		return map;
 	}

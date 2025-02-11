@@ -84,29 +84,29 @@
     <ul class="page-num">
       <c:if test="${page==1}"><li class="first"></li></c:if>
       <c:if test="${page!=1}">
-        <a href="/board/blist?page=1"><li class="first"></li></a>
+        <a href="/board/blist?page=1&category=${category}&searchW=${searchW}"><li class="first"></li></a>
       </c:if>
       <c:if test="${page==1}"><li class="prev"></li></c:if>
       <c:if test="${page>1}">
-        <a href="/board/blist?page=${page-1}"><li class="prev"></li></a>
+        <a href="/board/blist?page=${page-1}&category=${category}&searchW=${searchW}"><li class="prev"></li></a>
       </c:if>
       <c:forEach var="i" begin="${startpage}" end="${endpage }">
       <c:if test="${page==i}">
       	  <li class="num on"><div>${i}</div></li>
       </c:if>
       <c:if test="${page!=i}">
-	      <a href="/board/blist?page=${i}">
+	      <a href="/board/blist?page=${i}&category=${category}&searchW=${searchW}">
 	      	<li class="num"><div>${i}</div></li>
 	      </a>
       </c:if>
       </c:forEach>
       <c:if test="${page==maxpage}"><li class="next"></li></c:if>
       <c:if test="${page<maxpage}">
-        <a href="/board/blist?page=${page+1}"><li class="next"></li></a>
+        <a href="/board/blist?page=${page+1}&category=${category}&searchW=${searchW}"><li class="next"></li></a>
       </c:if>
       <c:if test="${page==maxpage}"><li class="last"></li></c:if>
       <c:if test="${page!=maxpage}">
-        <a href="/board/blist?page=${maxpage}"><li class="last"></li></a>
+        <a href="/board/blist?page=${maxpage}&category=${category}&searchW=${searchW}"><li class="last"></li></a>
       </c:if>
       
     </ul>

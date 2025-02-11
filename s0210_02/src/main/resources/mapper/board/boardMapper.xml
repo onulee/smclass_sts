@@ -9,7 +9,7 @@
 	order by bgroup desc,bstep asc) rnum, 
 	a.* from board a 
     <if test="category == 'btitle' or category == 'bcontent'">
-       where $(category) like '%'||#{searchW}||'%'
+       where ${category} like '%'||#{searchW}||'%'
     </if>	
     <if test="category == 'all'">
        where btitle like '%'||#{searchW}||'%' or bcontent like '%'||#{searchW}||'%'
@@ -20,7 +20,7 @@
   <select id="countAll" resultType="int">
     select count(*) from board
     <if test="category == 'btitle' or category == 'bcontent'">
-       where $(category) like '%'||#{searchW}||'%'
+       where ${category} like '%'||#{searchW}||'%'
     </if>	
     <if test="category == 'all'">
        where btitle like '%'||#{searchW}||'%' or bcontent like '%'||#{searchW}||'%'
