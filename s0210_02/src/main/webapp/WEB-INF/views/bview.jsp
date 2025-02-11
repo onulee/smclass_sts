@@ -46,17 +46,17 @@
         <td colspan="3" class="article">${bdto.bcontent }</td>
       </tr>
       <tr>
-        <td colspan="3"><strong>다음글</strong> <span class="separator">|</span> [키즈잼] 2월 프로그램 안내</td>
+        <td colspan="3"><strong>다음글</strong> <span class="separator">|</span> ${ndto.btitle }</td>
       </tr>
       <tr>
-        <td colspan="3"><strong>이전글</strong> <span class="separator">|</span> [키즈잼] 2020년 1분기 정기 휴관일 안내</td>
+        <td colspan="3"><strong>이전글</strong> <span class="separator">|</span> ${pdto.btitle}</td>
       </tr>
     </table>
 
     <a href="/board/blist"><div class="list">목록</div></a>
     <a onclick="deleteBtn(${bdto.bno})"><div class="list">삭제</div></a>
-    <a href=""><div class="list">수정</div></a>
-    <a href=""><div class="list">답변달기</div></a>
+    <a href="/board/bupdate?bno=${bdto.bno}"><div class="list">수정</div></a>
+    <a href="/board/breply?bno=${bdto.bno}"><div class="list">답변달기</div></a>
   </section>
 </body>
 </html>

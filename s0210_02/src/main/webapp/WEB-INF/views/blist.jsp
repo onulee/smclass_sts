@@ -54,7 +54,12 @@
 	      <tr>
 	        <td><span class="table-notice">${bdto.bno}</span></td>
 	        <td class="table-title">
-	        <a href="/board/bview?bno=${bdto.bno}">${bdto.btitle}</a>
+	        <a href="/board/bview?bno=${bdto.bno}">
+	          <c:forEach var="i" begin="1" end="${bdto.bindent}">
+	          ▶
+	          </c:forEach>
+	          ${bdto.btitle}
+	        </a>
 	        </td>
 	        <td>${bdto.id}</td>
 	        <td>${bdto.bdate}</td>

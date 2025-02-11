@@ -5,12 +5,32 @@
 <mapper namespace="com.java.dao.BoardMapper">
   <!-- 게시글 전체리스트 -->
   <select id="selectAll" resultType="com.java.dto.BoardDto">
-    select * from board order by bno desc
+    select * from board order by bgroup desc, bstep asc
   </select>
   <!-- 1개 게시글 가져오기 -->
   <select id="selectOne" resultType="com.java.dto.BoardDto">
     select * from board where bno=#{bno}
   </select>
+  <!-- 이전게시글 정보 -->
+  <select id="selectOnePrev" resultType="com.java.dto.BoardDto">
+    select * from board where bno =
+	( select prev_bno from
+	( select bno,lead(bno,1,-1) 
+	over (order by bgroup desc,bstep asc) as prev_bno
+	from board ) where bno=#{bno}
+	)
+  </select>
+  <!-- 다음게시글 정보 -->
+  <select id="selectOneNext" resultType="com.java.dto.BoardDto">
+    select * from board where bno =
+	( select prev_bno from
+	( select bno,lag(bno,1,-1) 
+	over (order by bgroup desc,bstep asc) as prev_bno
+	from board ) where bno=#{bno}
+	)
+  </select>
+  
+  
   <!-- 조회수 1증가 -->
   <update id="updateBhit">
      update board set bhit=bhit+1 where bno=#{bno}
@@ -28,6 +48,26 @@
   <delete id="deleteBoard">
      delete board where bno=#{bno}
   </delete>
+  
+  <!-- 글쓰기 수정저장 -->
+  <update id="updateBoard">
+     update board set btitle=#{btitle},bcontent=#{bcontent},
+     bdate=sysdate where bno=#{bno}
+  </update>
+  
+  <!-- 답변달기 : 자식게시글 bstep 1증가 -->
+  <update id="bstepUp">
+  	 update board set bstep = bstep+1 where bgroup=#{bgroup}
+  	 and bstep>#{bstep}
+  </update>
+  
+  <insert id="InsertBreply">
+     insert into board values (
+		board_seq.nextval,#{btitle},#{bcontent},#{id},
+		#{bgroup},#{bstep}+1,#{bindent}+1,0,sysdate
+	 ) 
+  
+  </insert>
   
   
   
