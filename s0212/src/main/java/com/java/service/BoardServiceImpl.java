@@ -19,4 +19,10 @@ public class BoardServiceImpl implements BoardService {
 		return list;
 	}
 
+	@Override //게시글저장
+	public void bwrite(BoardDto bdto) {
+		boardMapper.insertBoard(bdto);
+		
+	}
+
 }

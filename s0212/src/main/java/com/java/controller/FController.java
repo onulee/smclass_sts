@@ -63,9 +63,11 @@ public class FController {
 		}else {
 			bdto.setBfile("");
 		}
+		//게시글저장
+		boardService.bwrite(bdto);
 		
 		System.out.println("파일업로드 성공!!");
-		return "redirect:/?fname="+real_fname;
+		return "redirect:/board/blist";
 	}
 	
 	@GetMapping("/board/bwrite")
