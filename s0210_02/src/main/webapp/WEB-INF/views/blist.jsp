@@ -16,8 +16,11 @@
   </style>
   <script>
      const searchBtn = () => {
-    	 if($(".searchW").val().length<1){
+    	 var searchW = $(".searchW").val().trim(); //앞뒤공백제거
+    	 
+    	 if(searchW.length<1){
     		 alert("검색어를 입력하셔야 검색이 가능합니다.");
+    		 $(".searchW").val(""); //input에 데이터 지우기
     		 $(".searchW").focus();
     		 return;
     	 }
