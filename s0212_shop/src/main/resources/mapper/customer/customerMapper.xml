@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.CustomerMapper">
+
+	<select id="selectAll" resultType="com.java.dto.BoardDto">
+	   select * from board order by bgroup desc,bstep asc
+	</select>
+	<select id="selectOne" resultType="com.java.dto.BoardDto">
+	   select * from board where bno = #{bno}
+	</select>
+	<select id="selectOnePrev" resultType="com.java.dto.BoardDto">
+	   select * from board where bno =
+		( select prev_bno from
+		( select bno,lead(bno,1,-1) 
+		over (order by bgroup desc,bstep asc) as prev_bno
+		from board ) where bno=#{bno}
+		)
+	</select>
+	
+	<select id="selectOneNext" resultType="com.java.dto.BoardDto">
+	   select * from board where bno =
+		( select prev_bno from
+		( select bno,lag(bno,1,-1) 
+		over (order by bgroup desc,bstep asc) as prev_bno
+		from board ) where bno=#{bno}
+		)
+	</select>
+	
+	<!-- 조회수 1증가 -->
+    <update id="updateBhit">
+       update board set bhit=bhit+1 where bno=#{bno}
+    </update>
+
+</mapper>

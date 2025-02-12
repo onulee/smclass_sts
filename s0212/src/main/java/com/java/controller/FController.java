@@ -12,6 +12,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.java.dto.BoardDto;
@@ -21,9 +22,19 @@ import com.java.service.BoardService;
 public class FController {
 	@Autowired BoardService boardService;
 	
+//	# jsp 위치 설정 #
+//	Controller -> jsp페이지를 열어달라고 요청
+//	spring.mvc.view.prefix=/WEB-INF/views/index.jsp
+//	spring.mvc.view.suffix=.jsp
+	
+	@ResponseBody //데이터를 전달해달라고 요청
+	@GetMapping("/rpage")
+	public String rpage() {
+		return "rpage";   
+	}
 	@GetMapping("/")
 	public String index() {
-		return "index";
+		return "index";   //
 	}
 	
 	@GetMapping("/board/bview") //게시글1개 가져오기

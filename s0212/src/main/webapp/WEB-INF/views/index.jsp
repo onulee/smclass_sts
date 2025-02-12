@@ -26,6 +26,8 @@
 	 <ul>
 		   <li><a href="/member/login">로그인</a></li>
 		   <li><a href="/member/logout">로그아웃</a></li>
+		   <li><a href="/restpage">restController 데이터</a></li>
+		   <li><a href="/rpage">Controller 데이터</a></li>
 		   <li><a href="/board/bwrite">글쓰기</a></li>
 		   <li><a href="/board/blist">게시판</a></li>
 		   <li><a href="/member/member">회원가입</a></li>

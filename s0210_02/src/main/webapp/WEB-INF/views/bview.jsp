@@ -45,6 +45,13 @@
       <tr>
         <td colspan="3" class="article">${bdto.bcontent }</td>
       </tr>
+      <c:if test="${bdto.bfile != null}">
+	      <tr>
+	        <td colspan="3" class="article">
+	          <img src="/upload/board/${bdto.bfile }" width="50%" />
+	        </td>
+	      </tr>
+      </c:if>
       <tr>
         <td colspan="3"><strong>다음글</strong> <span class="separator">|</span> 
         <c:if test="${ndto != null }">
