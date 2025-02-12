@@ -25,6 +25,13 @@ public class FController {
 		return "index";
 	}
 	
+	@GetMapping("/board/bview") //게시글1개 가져오기
+	public String bview( int bno,Model model) {
+		BoardDto boardDto = boardService.bview(bno);
+		model.addAttribute("bdto",boardDto);
+		return "bview";
+	}
+	
 	@GetMapping("/board/blist")
 	public String blist(Model model) {
 		ArrayList<BoardDto> list = boardService.blist();

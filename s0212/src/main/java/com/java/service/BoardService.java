@@ -12,4 +12,7 @@ public interface BoardService {
 	//게시글저장
 	void bwrite(BoardDto bdto);
 
+	//게시글1개 가져오기
+	BoardDto bview(int bno);
+
 }

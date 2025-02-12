@@ -20,7 +20,6 @@
 		
 	</head>
 	<body>
-	 <div><img src="/images/r01.jpg"></div>
 	 <h2>메인페이지</h2>
 	 <div>섹션아이디 : ${session_id }</div>
 	 <div>섹션이름 : ${session_name } 님 환영합니다.</div>
@@ -37,7 +36,8 @@
 	 </ul>
 	 <h3>이미지 보여짐</h3>
 	 <div>
-	      <img src="/upload/${param.fname}" />
+	      
+	      	<img src="/upload/${param.fname}" />
 	 </div>
 	
 	</body>

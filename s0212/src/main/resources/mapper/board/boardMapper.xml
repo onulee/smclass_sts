@@ -8,6 +8,10 @@
      select * from board order by bgroup desc,bstep asc
   </select>
   
+  <select id="selectOne" resultType="com.java.dto.BoardDto">
+     select * from board where bno=#{bno}
+  </select>
+  
   <insert id="insertBoard">
      insert into board values (board_seq.nextval,#{btitle},
      #{bcontent},#{id},board_seq.currval,0,0,0,sysdate,#{bfile}  )

@@ -25,4 +25,10 @@ public class BoardServiceImpl implements BoardService {
 		
 	}
 
+	@Override //게시글1개 가져오기
+	public BoardDto bview(int bno) {
+		BoardDto boardDto = boardMapper.selectOne(bno);
+		return boardDto;
+	}
+
 }

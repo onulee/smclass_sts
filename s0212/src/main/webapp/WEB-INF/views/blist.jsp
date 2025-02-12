@@ -62,7 +62,9 @@
         <td>${bdto.bhit}</td>
         <td>
         <c:if test="${bdto.bfile != null }">
+          <a href="/upload/${bdto.bfile}" download>
           <img src="/images/fileicon.png" width="25px">
+          </a>
         </c:if>
         
         </td>
