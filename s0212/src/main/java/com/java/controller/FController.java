@@ -3,6 +3,7 @@ package com.java.controller;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,10 +40,47 @@ public class FController {
 		return "blist";
 	}
 	
-	@PostMapping("/board/bwrite")
+	//2개이상 파일 업로드
+//	@PostMapping("/board/bwrite")  
+//	public String bwrite(BoardDto bdto,
+//			List<MultipartFile> files) throws Exception {
+//		String real_fname = "";
+//		if(!files.isEmpty()) { //파일첨부가 되어 있으면
+//			
+//			//파일이 2개 있을시, 2번 실행
+//			for(MultipartFile file : files) {
+//				// 최초파일이름 -> 중복방지를 위해 파일이름변경
+//				String origin_fname = file.getOriginalFilename();
+//				System.out.println("최초파일이름 : "+origin_fname);
+//				long time = System.currentTimeMillis();
+//				
+//				real_fname = String.format("%d_%s",time,origin_fname);
+//				System.out.println("변경파일이름 : "+real_fname);
+//				//파일저장위치
+//				String url = "C:/upload/board/"; //파일업로드
+//				
+//				//파일저장
+//				File f = new File(url+real_fname);
+//				
+//				//파일업로드
+//				file.transferTo(f);
+//			}
+//			
+//			// dto에 파일이름 저장
+//			bdto.setBfile(real_fname);
+//		}else {
+//			bdto.setBfile("");
+//		}
+//		//게시글저장
+//		boardService.bwrite(bdto);
+//		
+//		System.out.println("파일업로드 성공!!");
+//		return "redirect:/board/blist";
+//	}
+	
+	@PostMapping("/board/bwrite")  //1개파일 업로드
 	public String bwrite(BoardDto bdto,
 			@RequestPart MultipartFile files) throws Exception {
-		
 		String real_fname = "";
 		if(!files.isEmpty()) { //파일첨부가 되어 있으면
 			// 최초파일이름 -> 중복방지를 위해 파일이름변경
@@ -76,6 +114,7 @@ public class FController {
 		System.out.println("파일업로드 성공!!");
 		return "redirect:/board/blist";
 	}
+	
 	
 	@GetMapping("/board/bwrite")
 	public String bwrite() {

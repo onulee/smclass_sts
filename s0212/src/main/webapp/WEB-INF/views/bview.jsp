@@ -33,14 +33,17 @@
         <td>작성자가 들어갑니다.</td>
         <td>조회수</td>
         <td>111</td>
+        
       </tr>
       <tr>
         <td colspan="3" class="article">${bdto.bcontent }</td>
       </tr>
       <tr>
         <td colspan="3" class="article">
+          <c:if test="${bdto.bfile != null }">
           파일첨부 : <br>
           <img src="/upload/board/${bdto.bfile }" width="50%"/>
+          </c:if>
         </td>
       </tr>
       <tr>

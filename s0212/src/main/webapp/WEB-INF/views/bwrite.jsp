@@ -4,12 +4,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="http://code.jquery.com/jquery-latest.min.js"></script>
   <title>글쓰기</title>
   <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:400,500,700,900&display=swap&subset=korean" rel="stylesheet">
   <link rel="stylesheet" href="/css/style.css">
   <link rel="stylesheet" href="/css/write.css">
+  <script>
+    const readUrl = (input) => {
+    	if(input.files && input.files[0]){ //파일이름이 있으면
+    		var reader = new FileReader(); //파일읽기 객체 가져오기
+    		reader.onload = function(e){
+    			document.getElementById("preview").src = e.target.result;
+    		};
+    		reader.readAsDataURL(input.files[0]);
+    	}else{
+    			document.getElementById("preview").src = "";
+    	}
+    }
+  
+    
+  
+  </script>
 </head>
 <body>
 <section>
@@ -43,7 +60,18 @@
         <tr>
           <th>이미지 표시</th>
           <td>
-            <input type="file" name="files" id="file">
+            <input type="file" name="files" id="file" onchange="readUrl(this);" >
+          </td>
+        </tr>
+        <tr>
+          <th>이미지 표시</th>
+          <td>
+            <input type="file" name="files" id="file" onchange="readUrl(this);" >
+          </td>
+        </tr>
+        <tr>
+          <td>
+            <img id="preview" style="width:100px"/>
           </td>
         </tr>
       </table>

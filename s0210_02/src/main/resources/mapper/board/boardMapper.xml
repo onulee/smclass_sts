@@ -62,7 +62,7 @@
   <insert id="insertBoard">
     insert into board values (
 		board_seq.nextval,#{btitle},#{bcontent},#{id},
-		board_seq.currval,0,0,0,sysdate
+		board_seq.currval,0,0,0,sysdate,#{bfile}
 	)
   </insert>
   
