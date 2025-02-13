@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.java.dao.EventMapper">
+  <select id="selectAll" resultType="com.java.dto.EventDto">
+    <![CDATA[
+    select * from event where rownum<=4 order by eno desc
+    ]]>
+  </select>
+  
+  <select id="selectOne" resultType="com.java.dto.EventDto">
+    select * from event where eno = #{eno}
+  </select>
+  <!-- 하단댓글 가져오기 -->  
+  <select id="selectAllCboard" resultType="com.java.dto.CboardDto">
+    select * from cboard where eno=#{eno}
+  </select>
+
+
+</mapper>

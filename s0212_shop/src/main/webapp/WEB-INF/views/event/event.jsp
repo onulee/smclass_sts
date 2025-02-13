@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,7 +93,11 @@ $(document).ready(function() {
 	<div id="header">
 		
 		<div id="snbBox">
-			<h1><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></h1>
+			<h1>
+			<a href="/">
+			  <img src="../images/txt/logo.gif" alt="JARDIN SHOP" />
+			</a>
+			</h1>
 			<div id="quickmenu">
 				<div id="mnaviOpen"><img src="../images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
 				<div id="mnaviClose"><img src="../images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
@@ -213,46 +221,23 @@ $(document).ready(function() {
 					<div class="eventList">
 						<ul>
 							<!-- 반복 -->
-							<li>
-								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
+							<c:forEach items="${list}" var="edto">
+								<li>
+									<div class="img">
+										<a href="/event/eview?eno=${edto.eno}"><img src="/upload/board/${edto.efile}" alt="진행중 이벤트" /></a>
+									</div>
+									<div class="txt">
+										<div class="subject">${edto.etitle }</div>
+										<div class="day">이벤트 기간 : 
+										<fmt:formatDate value="${edto.stdate}" pattern="yyyy-MM-dd"/>
+										~ 
+										<fmt:formatDate value="${edto.enddate}" pattern="yyyy-MM-dd"/>
+										</div>
+									</div>
+								</li>
+							</c:forEach>
 							<!-- //반복 -->
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
-
-							<li>
-								<div class="img">
-									<a href="#"><img src="../images/img/sample_event.jpg" alt="진행중 이벤트" /></a>
-								</div>
-								<div class="txt">
-									<div class="subject">까페모리 봄바람 커피한잔 30% 할인 이벤트!!</div>
-									<div class="day">이벤트 기간 : 2014-04-01 ~ 2014-04-29</div>
-								</div>
-							</li>
+							
 						</ul>
 					</div>
 					<!-- //list -->

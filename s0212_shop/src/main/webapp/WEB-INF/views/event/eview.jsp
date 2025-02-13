@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -89,12 +93,16 @@ $(document).ready(function() {
 	<div id="header">
 		
 		<div id="snbBox">
-			<h1><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></h1>
+			<h1>
+			<a href="/">
+			  <img src="../images/txt/logo.gif" alt="JARDIN SHOP" />
+			</a>
+			</h1>
 			<div id="quickmenu">
 				<div id="mnaviOpen"><img src="../images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
 				<div id="mnaviClose"><img src="../images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
 				<ul>
-					<li><a href="#">EVENT</a></li>
+					<li><a href="/event/event">EVENT</a></li>
 					<li><a href="#">CUSTOMER</a></li>
 					<li><a href="#">COMMUNITY</a></li>
 				</ul>
@@ -187,8 +195,8 @@ $(document).ready(function() {
 
 		<div id="location">
 			<ol>
-				<li><a href="#">HOME</a></li>
-				<li><a href="#">EVENT</a></li>
+				<li><a href="/">HOME</a></li>
+				<li><a href="/event/event">EVENT</a></li>
 				<li class="last">진행중 이벤트</li>
 			</ol>
 		</div>
@@ -213,16 +221,23 @@ $(document).ready(function() {
 						<div class="viewHead">
 							<div class="subject">
 								<ul>
-									<li>까페모리 봄바람 커피한잔 30% 할인 이벤트!!</li>
+									<li>${edto.etitle}</li>
 								</ul>
 							</div>
 							<div class="day">
-								<p class="txt">이벤트 기간<span>2014-04-01 ~ 2014-04-29</span></p>
+								<p class="txt">이벤트 기간
+								<span>
+								<fmt:formatDate value="${edto.stdate}" pattern="yyyy-MM-dd"/>
+								~ 
+								<fmt:formatDate value="${edto.enddate}" pattern="yyyy-MM-dd"/>
+								</span></p>
 							</div>
 						</div>
 
 						<div class="viewContents">
-							<img src="../images/img/sample_event_view.jpg" alt="" />
+						    ${edto.econtent}
+						    <br/>
+							<img src="/upload/board/${edto.efile2}" alt="" />
 						</div>
 					</div>
 
@@ -268,21 +283,25 @@ $(document).ready(function() {
 					</div>
 
 					<div class="replyBox">
+						
+						<c:forEach items="${clist}" var="cdto">
+						<ul>
+							<li class="name">${cdto.id} <span>[${cdto.cdate }]</span></li>
+							<li class="txt">${cdto.ccontent }</li>
+							<li class="btn">
+								<a class="rebtn updateBtn">수정</a>
+								<a class="rebtn deleteBtn">삭제</a>
+							</li>
+						</ul>
+						</c:forEach>
+
+						<!-- 댓글수정,비밀글 창
 						<ul>
 							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
 							<li class="txt"><textarea class="replyType"></textarea></li>
 							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
-								<a href="#" class="rebtn">삭제</a>
-							</li>
-						</ul>
-
-						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt">대박!!! 이거 저한테 완전 필요한 이벤트였어요!!</li>
-							<li class="btn">
-								<a href="#" class="rebtn">수정</a>
-								<a href="#" class="rebtn">삭제</a>
+								<a href="#" class="rebtn">완료</a>
+								<a href="#" class="rebtn">취소</a>
 							</li>
 						</ul>
 
@@ -292,6 +311,7 @@ $(document).ready(function() {
 								<a href="password.html" class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
 							</li>
 						</ul>
+						 -->
 					</div>
 					<!-- //댓글 -->
 
@@ -300,7 +320,7 @@ $(document).ready(function() {
 					<div class="btnArea">
 						<div class="bRight">
 							<ul>
-								<li><a href="#" class="sbtnMini mw">목록</a></li>
+								<li><a href="/event/event" class="sbtnMini mw">목록</a></li>
 							</ul>
 						</div>
 					</div>
