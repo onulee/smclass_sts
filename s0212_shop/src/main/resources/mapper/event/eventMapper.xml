@@ -12,9 +12,22 @@
   <select id="selectOne" resultType="com.java.dto.EventDto">
     select * from event where eno = #{eno}
   </select>
+  
+  
   <!-- 하단댓글 가져오기 -->  
   <select id="selectAllCboard" resultType="com.java.dto.CboardDto">
-    select * from cboard where eno=#{eno}
+    select * from cboard where eno=#{eno} order by cno desc
+  </select>
+  
+  <insert id="insertCboard">
+    <selectKey resultType="int" keyProperty="cno" order="BEFORE">
+      select cboard_seq.nextval from dual
+    </selectKey>
+    insert into cboard values (
+    #{cno},#{eno},#{id},#{cpw},#{ccontent},sysdate)
+  </insert>
+  <select id="selectOneCboard" resultType="com.java.dto.CboardDto">
+    select * from cboard where cno = #{cno}
   </select>
 
 

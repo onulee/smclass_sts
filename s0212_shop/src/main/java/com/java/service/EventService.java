@@ -12,5 +12,7 @@ public interface EventService {
 	EventDto eview(int eno);
     //하단댓글 가져오기
 	ArrayList<CboardDto> clist(int eno);
+    //하단댓글 저장
+	CboardDto cwrite(CboardDto cdto);
 
 }

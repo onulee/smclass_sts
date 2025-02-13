@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
 <%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -22,6 +23,8 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -267,17 +270,79 @@ $(document).ready(function() {
 						</table>
 					</div>
 					<!-- //이전다음글 -->
-
+					<script>
+					  $(function(){
+						  $(".replyBtn").click(function(){
+							 if($(".replyType").val().length<1){
+								 alert("댓글 내용을 입력하셔야 저장이 가능합니다.");
+								 $(".replyType").focus();
+								 return;
+							 }
+							 alert("댓글을 저장합니다."); 
+							 console.log("총 개수 : "+(Number($(".allcount").text())+1));
+							 
+							 let cpw = $(".replynum").val();
+							 let ccontent = $(".replyType").val();
+							 let eno = "${edto.eno}";
+							 
+							 //ajax
+							 $.ajax({
+								url:"/event/cwrite", //링크주소
+								type:"post",         //타입
+								data:{"eno":eno,"cpw":cpw,"ccontent":ccontent}, //파라미터
+								dataType:"json", //리턴받을 값의 형태
+								success:function(data){
+									console.log(data.cno);
+									console.log(data.ccontent);
+									console.log(data.cdate);
+									let cno = data.cno;
+									let ccontent = data.ccontent;
+									let cdate = data.cdate;
+									let id = data.id;
+									
+									//데이터 html코드 생성
+									let hdata = "";
+									
+									hdata += '<ul id="'+cno+'">';
+									hdata += '<li class="name">'+id+'<span> [ '+
+										moment(cdate).format("YYYY-MM-DD HH:mm:ss")
+										+' ]</span></li>';
+									hdata += '<li class="txt">'+ccontent+'</li>';
+									hdata += '<li class="btn">';
+									hdata += '<a class="rebtn updateBtn">수정</a>&nbsp';
+									hdata += '<a class="rebtn deleteBtn">삭제</a>';
+									hdata += '</li>';
+									hdata += '</ul>';
+									
+									$(".replyBox").prepend(hdata);
+									
+									//총개수 1증가
+									let allcount = Number($(".allcount").text())+1;
+									$(".allcount").text(allcount);
+									
+									//입력된 글 삭제
+									$(".replynum").val("");
+									$(".replyType").val("");
+								},
+								error:function(){
+									alert("댓글저장 실패");
+								}
+							 });//ajax
+							 
+						  });
+					  });
+					
+					</script>
 
 					<!-- 댓글-->
 					<div class="replyWrite">
 						<ul>
 							<li class="in">
-								<p class="txt">총 <span class="orange">3</span> 개의 댓글이 달려있습니다.</p>
+								<p class="txt">총 <span class="orange allcount">${clist.size()}</span> 개의 댓글이 달려있습니다.</p>
 								<p class="password">비밀번호&nbsp;&nbsp;<input type="password" class="replynum" /></p>
 								<textarea class="replyType"></textarea>
 							</li>
-							<li class="btn"><a href="#" class="replyBtn">등록</a></li>
+							<li class="btn"><a class="replyBtn">등록</a></li>
 						</ul>
 						<p class="ntic">※ 비밀번호를 입력하시면 댓글이 비밀글로 등록 됩니다.</p>
 					</div>
@@ -285,7 +350,7 @@ $(document).ready(function() {
 					<div class="replyBox">
 						
 						<c:forEach items="${clist}" var="cdto">
-						<ul>
+						<ul id="${cdto.cno}">
 							<li class="name">${cdto.id} <span>[${cdto.cdate }]</span></li>
 							<li class="txt">${cdto.ccontent }</li>
 							<li class="btn">

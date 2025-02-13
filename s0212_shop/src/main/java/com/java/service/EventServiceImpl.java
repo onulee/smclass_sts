@@ -32,4 +32,12 @@ public class EventServiceImpl implements EventService {
 		return clist;
 	}
 
+	@Override //하단댓글 저장
+	public CboardDto cwrite(CboardDto cdto) {
+		eventMapper.insertCboard(cdto);
+		CboardDto cboardDto = eventMapper.selectOneCboard(cdto.getCno());
+		
+		return cboardDto;
+	}
+
 }

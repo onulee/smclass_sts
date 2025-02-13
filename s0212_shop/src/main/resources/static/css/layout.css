@@ -1,5 +1,6 @@
 /* layout */
 html{overflow-y:scroll; width:100%;}
+a{cursor: pointer;}
 #allwrap{position:relative; width:100%; overflow:hidden;}
 #wrap{}
 
