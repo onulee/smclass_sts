@@ -22,7 +22,7 @@ public class ReController {
 		System.out.println("eno : "+cdto.getEno());
 		System.out.println("cpw : "+cdto.getCpw());
 		System.out.println("ccontent : "+cdto.getCcontent());
-		cdto.setId("aaa");
+		cdto.setId((String)session.getAttribute("session_id"));
 		//String id = (String) session.getAttribute("session_id");
 		//하단댓글 저장
 		CboardDto cboardDto = eventService.cwrite(cdto);
@@ -41,12 +41,12 @@ public class ReController {
 		return cboardDto;  //데이터를 전달함, 페이지를 오픈 하는 것이 아님.
 	}
 	
+	//댓글삭제
 	@PostMapping("/event/cdelete")
 	public String cdelete(int cno) {
 		System.out.println("cno : "+cno);
-		//String id = (String) session.getAttribute("session_id");
 		//하단댓글 삭제
-		//CboardDto cboardDto = eventService.cwrite(cdto);
+		eventService.cdelete(cno);
 		return "1";  //데이터를 전달함, 페이지를 오픈 하는 것이 아님.
 	}
 	

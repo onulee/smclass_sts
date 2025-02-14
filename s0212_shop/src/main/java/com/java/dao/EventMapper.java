@@ -22,5 +22,7 @@ public interface EventMapper {
 	void updateCboard(CboardDto cdto);
     //저장된 댓글 가져오기
 	CboardDto selectOneCboard(int cno);
+    //하단 댓글 삭제
+	void deleteCboard(int cno);
 
 }

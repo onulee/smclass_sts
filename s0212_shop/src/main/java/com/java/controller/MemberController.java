@@ -17,6 +17,12 @@ public class MemberController {
 	@Autowired HttpSession session;
 	@Autowired MemberService memberService;
 	
+	@GetMapping("/member/logout")
+	public String logout() {
+		session.invalidate();
+		return "redirect:/?loginChk=0";
+	}
+	
 	@GetMapping("/member/login")
 	public String login() {
 		return "member/login";

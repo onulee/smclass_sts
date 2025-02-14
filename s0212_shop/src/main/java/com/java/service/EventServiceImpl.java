@@ -49,4 +49,9 @@ public class EventServiceImpl implements EventService {
 		return cboardDto;
 	}
 
+	@Override //하단댓글 삭제
+	public void cdelete(int cno) {
+		eventMapper.deleteCboard(cno);
+	}
+
 }

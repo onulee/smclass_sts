@@ -34,6 +34,10 @@
     update cboard set ccontent=#{ccontent},cdate=sysdate
     where cno = #{cno}
   </update>
+  
+  <delete id="deleteCboard">
+    delete cboard where cno = #{cno}
+  </delete>
 
 
 </mapper>

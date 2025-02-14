@@ -29,12 +29,18 @@
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
 <![endif]-->
+
 <script type="text/javascript">
-$(document).ready(function() {
-	
-
-
+$(function() {
+	$(".sbtn").click(function(){
+		  loginFrm.submit();
+	  })
 });
+
+//로그인 여부
+if("${loginChk}"=="0"){
+	alert("아이디 또는 패스워드가 일치하지 않습니다. 다시 로그인해주세요.");
+}
 </script>
 </head>
 <body>
@@ -212,17 +218,7 @@ $(document).ready(function() {
 					<li class="last"><a href="#" id="leftNavi6">이메일무단<span>수집거부</span></a></li>
 				</ul>			
 			</div><script type="text/javascript">initSubmenu(1,0);</script>
-			<script>
-			  $(function(){
-				  $(".sbtn").click(function(){
-					  alert("로그인 버튼 클릭");
-					  alert($("input[name='id']").val());
-					  loginFrm.submit();
-				  })
-				  
-				  
-			  });//jquery
-			</script>
+			
 
 			<!-- contents -->
 			<div id="contents">

@@ -275,13 +275,21 @@ $(document).ready(function() {
 						  let chk = 0; //화면창 열림체크
 						  let cno;
 						  let eno = "${edto.eno}";
-						  let id;
+						  let id = "${session_id}";
 						  let cdate;
 						  let ccontent;
 						  
 						  
 						  //댓글쓰기
 						  $(".replyBtn").click(function(){
+							 if("${session_id}"==""){
+								 alert("로그인을 하셔야 댓글을 사용할수 있습니다.");
+								 if(confirm("로그인페이지로 이동할까요?")){
+									 location.href="/member/login";
+								 }
+								 return;
+							 } 
+							  
 							 if($(".replyType").val().length<1){
 								 alert("댓글 내용을 입력하셔야 저장이 가능합니다.");
 								 $(".replyType").focus();
@@ -371,12 +379,9 @@ $(document).ready(function() {
 								  alert("다른 수정화면이 열려 있습니다. 완료,취소를 한후 수정이 가능합니다.");
 								  return;
 							  }
-							  
 							  chk=1;
-							  
 							  cno = $(this).closest("ul").attr("id");
 							  cdate = $(this).closest("ul").children(".name").children("span").text();
-							  id = "aaa";
 							  ccontent = $(this).closest("ul").children(".txt").text();
 							  console.log(cno);
 							  console.log(cdate);
@@ -472,32 +477,37 @@ $(document).ready(function() {
 					</div>
 
 					<div class="replyBox">
-						
 						<c:forEach items="${clist}" var="cdto">
-						<ul id="${cdto.cno}">
+						<c:if test="${session_id == cdto.id }">
+							<ul id="${cdto.cno}">
+								<li class="name">${cdto.id} <span>[${cdto.cdate }]</span></li>
+								<li class="txt">${cdto.ccontent }</li>
+								<li class="btn">
+									<a class="rebtn updateBtn">수정</a>
+									<a class="rebtn deleteBtn">삭제</a>
+								</li>
+							</ul>
+						</c:if>
+						<c:if test="${session_id != cdto.id }">
+						<ul>
 							<li class="name">${cdto.id} <span>[${cdto.cdate }]</span></li>
-							<li class="txt">${cdto.ccontent }</li>
-							<li class="btn">
-								<a class="rebtn updateBtn">수정</a>
-								<a class="rebtn deleteBtn">삭제</a>
+							<c:if test="${cdto.cpw != null }">
+							<li class="txt">
+								<a class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
 							</li>
+							</c:if>
+							<c:if test="${cdto.cpw == null }">
+								<li class="txt">${cdto.ccontent }</li>
+							</c:if>
 						</ul>
+						</c:if>
 						</c:forEach>
 
-						<!-- 댓글수정,비밀글 창
-						<ul id=37>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
-							<li class="txt"><textarea class="replyType"></textarea></li>
-							<li class="btn">
-								<a href="#" class="rebtn saveBtn">완료</a>
-								<a href="#" class="rebtn cancelBtn">취소</a>
-							</li>
-						</ul>
-
+						<!-- 비밀글 창
 						<ul>
-							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
+							<li class="name">${cdto.id} <span>[${cdto.cdate }]</span></li>
 							<li class="txt">
-								<a href="password.html" class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
+								<a class="passwordBtn"><span class="orange">※ 비밀글입니다.</span></a>
 							</li>
 						</ul>
 						 -->
