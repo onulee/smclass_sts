@@ -272,6 +272,15 @@ $(document).ready(function() {
 					<!-- //이전다음글 -->
 					<script>
 					  $(function(){
+						  let chk = 0; //화면창 열림체크
+						  let cno;
+						  let eno = "${edto.eno}";
+						  let id;
+						  let cdate;
+						  let ccontent;
+						  
+						  
+						  //댓글쓰기
 						  $(".replyBtn").click(function(){
 							 if($(".replyType").val().length<1){
 								 alert("댓글 내용을 입력하셔야 저장이 가능합니다.");
@@ -295,19 +304,14 @@ $(document).ready(function() {
 									console.log(data.cno);
 									console.log(data.ccontent);
 									console.log(data.cdate);
-									let cno = data.cno;
-									let ccontent = data.ccontent;
-									let cdate = data.cdate;
-									let id = data.id;
 									
-									//데이터 html코드 생성
 									let hdata = "";
-									
-									hdata += '<ul id="'+cno+'">';
-									hdata += '<li class="name">'+id+'<span> [ '+
-										moment(cdate).format("YYYY-MM-DD HH:mm:ss")
+									//데이터 html코드 생성
+									hdata += '<ul id="'+data.cno+'">';
+									hdata += '<li class="name">'+data.id+'<span> [ '+
+										moment(data.cdate).format("YYYY-MM-DD HH:mm:ss")
 										+' ]</span></li>';
-									hdata += '<li class="txt">'+ccontent+'</li>';
+									hdata += '<li class="txt">'+data.ccontent+'</li>';
 									hdata += '<li class="btn">';
 									hdata += '<a class="rebtn updateBtn">수정</a>&nbsp';
 									hdata += '<a class="rebtn deleteBtn">삭제</a>';
@@ -328,9 +332,129 @@ $(document).ready(function() {
 									alert("댓글저장 실패");
 								}
 							 });//ajax
-							 
-						  });
-					  });
+						  });//댓글쓰기-replyBtn
+						  
+						  //댓글삭제 - 정적형태:화면표시가 되면 추가된 html소스에는 적용이 안됨.
+						  //$(".deleteBtn").click(function(){ });
+						  
+						  //댓글삭제 - 동적형태:추가적인 html소스에서도 적용이 가능
+						  $(document).on("click",".deleteBtn",function(){
+							  console.log($(this).closest("ul").attr("id"));
+							  let cno = $(this).closest("ul").attr("id");
+							  if(confirm(cno+"번 댓글을 삭제하시겠습니까?")){
+							      alert(cno+"번 게시글이 삭제되었습니다.");
+								  
+							      $.ajax({
+							    	url:"/event/cdelete", //링크주소
+									type:"post",         //타입
+									data:{"cno":cno}, //파라미터
+									dataType:"text", //리턴받을 값의 형태
+									success:function(data){
+										console.log(data);
+										//삭제
+										$("#"+cno).remove();
+										//총개수 1증가
+										let allcount = Number($(".allcount").text())-1;
+										$(".allcount").text(allcount);
+										
+									},
+									error:function(){
+										alert("댓글저장 실패");
+									}
+							      });//ajax
+							  }
+						  });//deleteBtn
+						  
+						  //updateBtn 수정화면
+						  $(document).on("click",".updateBtn",function(){
+							  if (chk==1){
+								  alert("다른 수정화면이 열려 있습니다. 완료,취소를 한후 수정이 가능합니다.");
+								  return;
+							  }
+							  
+							  chk=1;
+							  
+							  cno = $(this).closest("ul").attr("id");
+							  cdate = $(this).closest("ul").children(".name").children("span").text();
+							  id = "aaa";
+							  ccontent = $(this).closest("ul").children(".txt").text();
+							  console.log(cno);
+							  console.log(cdate);
+							  console.log(id);
+							  console.log(ccontent);
+							  
+							  alert(cno+"번 하단댓글을 수정합니다.");
+							  
+							  let hdata = `
+								<li class="name">`+id+`<span> `+cdate+`</span></li>
+								<li class="txt"><textarea class="replyType">`+ccontent+`</textarea></li>
+								<li class="btn">
+								  <a class="rebtn saveBtn">완료</a>
+								  <a class="rebtn cancelBtn">취소</a>
+								</li>
+							  `;
+							  $("#"+cno).html(hdata);
+						  });//.updateBtn
+						  
+						  //수정화면 취소
+						  $(document).on("click",".cancelBtn",function(){
+							  alert(cno+"번 취소버튼 클릭")
+							  console.log(id);
+							  console.log(cdate);
+							  console.log(ccontent);
+							  
+							  let hdata = `
+								<li class="name">`+ id +` <span>`+ cdate +`</span></li>
+								<li class="txt">`+ ccontent+`</li>
+								<li class="btn">
+								  <a class="rebtn updateBtn">수정</a>
+								  <a class="rebtn deleteBtn">삭제</a>
+								</li>
+							  `;
+							  $("#"+cno).html(hdata);
+							  chk=0;
+						  });//.cancelBtn
+						  
+						  //댓글수정 저장
+						  $(document).on("click",".saveBtn",function(){
+							  alert(cno+"번 댓글수정을 하였습니다.");
+							  ccontent = $(this).closest("ul").children(".txt").children(".replyType").val();
+							  
+							 //ajax
+							 $.ajax({
+								url:"/event/cupdate", //링크주소
+								type:"post",         //타입
+								data:{"eno":eno,"cno":cno,"ccontent":ccontent}, //파라미터
+								dataType:"json", //리턴받을 값의 형태
+								success:function(data){
+									console.log(data.cno);
+									console.log(data.ccontent);
+									console.log(data.cdate);
+									
+									let hdata = "";
+									//데이터 html코드 생성
+									hdata += '<li class="name">'+data.id+'<span> [ '+
+										moment(data.cdate).format("YYYY-MM-DD HH:mm:ss")
+										+' ]</span></li>';
+									hdata += '<li class="txt">'+data.ccontent+'</li>';
+									hdata += '<li class="btn">';
+									hdata += '<a class="rebtn updateBtn">수정</a>&nbsp';
+									hdata += '<a class="rebtn deleteBtn">삭제</a>';
+									hdata += '</li>';
+									
+									$("#"+cno).html(hdata);
+									
+								},
+								error:function(){
+									alert("댓글저장 실패");
+								}
+							 });//ajax
+							 chk=0; 
+						  });//.saveBtn
+						  
+						  
+						  
+					  });//jquery
 					
 					</script>
 
@@ -361,12 +485,12 @@ $(document).ready(function() {
 						</c:forEach>
 
 						<!-- 댓글수정,비밀글 창
-						<ul>
+						<ul id=37>
 							<li class="name">jjabcde <span>[2014-03-04&nbsp;&nbsp;15:01:59]</span></li>
 							<li class="txt"><textarea class="replyType"></textarea></li>
 							<li class="btn">
-								<a href="#" class="rebtn">완료</a>
-								<a href="#" class="rebtn">취소</a>
+								<a href="#" class="rebtn saveBtn">완료</a>
+								<a href="#" class="rebtn cancelBtn">취소</a>
 							</li>
 						</ul>
 

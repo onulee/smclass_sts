@@ -15,8 +15,11 @@ public interface EventMapper {
 	EventDto selectOne(int eno);
     //하단댓글 가져오기
 	ArrayList<CboardDto> selectAllCboard(int eno);
+	
 	//하단댓글 저장
 	void insertCboard(CboardDto cdto);
+	//하단댓글 수정
+	void updateCboard(CboardDto cdto);
     //저장된 댓글 가져오기
 	CboardDto selectOneCboard(int cno);
 
