@@ -98,6 +98,7 @@ public class BoardController {
 			String category,String searchW,Model model) {
 		System.out.println("category : "+category);
 		System.out.println("searchW : "+searchW);
+		System.out.println("page : "+page);
 		//리스트출력 - 페이지,카테고리,검색어
 		Map<String, Object> map = boardService.blist(page,category,searchW);
 		model.addAttribute("list",map.get("list"));
