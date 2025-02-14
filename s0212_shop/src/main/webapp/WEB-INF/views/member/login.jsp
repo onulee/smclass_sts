@@ -219,7 +219,47 @@ if("${loginChk}"=="0"){
 				</ul>			
 			</div><script type="text/javascript">initSubmenu(1,0);</script>
 			
-
+			<script>
+			  $(function(){
+				
+				  //쿠키 읽기
+				  console.log("전체 : "+document.cookie);
+				  let c_id = "cook_id";	
+				  const cookies = document.cookie.split('; '); 
+				  console.log(cookies);
+				  for (let cookie of cookies) { 
+					  let [k, v] = cookie.split('=');
+					  // 찾고자 하는 쿠키가 있는지 확인
+					  if (k === c_id) {
+					   console.log(v); 
+					   $("input[name='id']").val(v);
+					   $("input[name='id']").focus();
+			           $("#idsave").attr("checked" , true);
+					  }
+				  }
+				  
+				 $("#idsave").change(function(){
+					if($("#idsave").is(":checked")){
+						alert("체크됨");
+						let cdata = $("input[name='id']").val();
+						console.log(cdata);
+						//쿠키저장						
+						const date = new Date();
+						date.setTime(date.getTime() + (60 * 60 * 1000)); // 1시간 후
+						document.cookie = `cook_id=`+cdata+`; expires=`+date.toUTCString()+`; path=/`;
+						console.log(document.cookie);
+					}else{
+						alert("체크해제");
+						//쿠키삭제
+						document.cookie = `cook_id=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/`;
+						$("input[name='id']").val('');
+						console.log("쿠키삭제");
+						console.log(document.cookie);
+						
+					} 
+				 });
+			  });
+			</script>
 			<!-- contents -->
 			<div id="contents">
 				<div id="member">
@@ -234,7 +274,7 @@ if("${loginChk}"=="0"){
 							</ul>
 
 							<div class="btn"><a class="sbtn">로그인</a></div>
-							<div class="chk"><input type="checkbox" id="idsave"/><label for="idsave">아이디 저장</label></div>							
+							<div class="chk"><input type="checkbox" id="idsave" name="idsave" value="1"/><label for="idsave">아이디 저장</label></div>							
 							</form>
 
 							<div class="point">

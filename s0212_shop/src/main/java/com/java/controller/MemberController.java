@@ -9,6 +9,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import com.java.dto.MemberDto;
 import com.java.service.MemberService;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -24,7 +27,12 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/login")
-	public String login() {
+	public String login(HttpServletResponse response,
+			HttpServletRequest request) {
+		//쿠키생성
+		Cookie cookie = new Cookie("cook_id", "aaa");
+		cookie.setMaxAge(60*10);
+		response.addCookie(cookie);
 		return "member/login";
 	}
 	
