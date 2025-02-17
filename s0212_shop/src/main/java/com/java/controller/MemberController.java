@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.dto.MemberDto;
 import com.java.service.MemberService;
@@ -19,6 +20,23 @@ public class MemberController {
 	
 	@Autowired HttpSession session;
 	@Autowired MemberService memberService;
+	
+	@GetMapping("/member/step01") //회원가입1
+	public String step01() {
+		return "member/step01";
+	}
+	
+	@ResponseBody //이메일 발송
+	@PostMapping("/member/sendEmail")
+	public String sendEmail(String email) {
+		System.out.println("sendEmail : "+email);
+		String pwCode = memberService.sendEmail(email);
+				
+		return pwCode;
+		
+	}
+	
+	
 	
 	@GetMapping("/member/logout")
 	public String logout() {

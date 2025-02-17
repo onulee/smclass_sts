@@ -204,7 +204,7 @@ $(document).ready(function() {
 			<div id="left">
 				<div id="title2">COMMUNITY<span>커뮤니티</span></div>
 				<ul>	
-					<li><a href="#" id="leftNavi1">체험단</a></li>
+					<li><a href="/community/comment" id="leftNavi1">체험단</a></li>
 					<li><a href="#" id="leftNavi2">사용 후기</a></li>
 					<li class="last"><a href="#" id="leftNavi3">ENJOY COFFEE</a></li>
 				</ul>			
@@ -232,7 +232,6 @@ $(document).ready(function() {
 							dataType:"json",
 							success:function(data){
 								//console.log(data);
-								alert("성공");
 								console.log(data.response.body.items.item);
 								let apiArr = data.response.body.items.item;
 								let hdata = ``;
@@ -240,7 +239,7 @@ $(document).ready(function() {
 								for(let i=0;i<4;i++){
 									hdata += `
 										<li>
-										<div class="img"><img src="../images/img/sample_epil.jpg" width="155" height="160" alt="" /></div>
+										<div class="img"><img src="`+apiArr[i].galWebImageUrl+`" width="155" height="160" alt="" /></div>
 										<div class="txt">
 											<div class="subject">
 												<a href="/community/epilogue_view?galContentId=`+apiArr[i].galContentId+`"><span class="orange">[제목] </span>`+apiArr[i].galTitle+`</a>

@@ -1,3 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %> 
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,6 +22,7 @@
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
 <script type="text/javascript" src="../js/idangerous.swiper-2.1.min.js"></script>
 <script type="text/javascript" src="../js/jquery.anchor.js"></script>
+<script src="http://code.jquery.com/jquery-latest.min.js"></script>
 <!--[if lt IE 9]>
 <script type="text/javascript" src="../js/html5.js"></script>
 <script type="text/javascript" src="../js/respond.min.js"></script>
@@ -244,11 +249,72 @@ $(document).ready(function() {
 							<li>회원님의 개인 정보 보호를 위해 실명확인을 실시하고 있습니다.</li>
 						</ul>
 					</div>
+					
+					<!-- table추가 -->
+					<div class="checkDivTab">
+						<table summary="분류, 구매여부, 평가, 제목, 상세 내용 순으로 상품평을 작성 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
+							<caption>상품평 작성</caption>
+							<colgroup>
+							<col width="25%" class="tw30" />
+							<col width="*" />
+							</colgroup>
+							<tbody>
+								<tr>
+									<th scope="row"><span>이메일주소 입력</span></th>
+									<td>
+										<input type="text" class="wlong" name="email" />
+									</td>
+								</tr>
+								<tr>
+									<th scope="row"><span>인증코드</span></th>
+									<td>
+										<input type="text" class="wlong" readonly />
+									</td>
+								</tr>
+															
+							</tbody>
+						</table>
+					</div>
 
-
+					<script>
+					  $(function(){
+						 $(".nbtnbig").click(()=>{
+							let email = $('input[name="email"]');
+							if(email.val().length<1){
+								alert("이메일을 입력하셔야 합니다.");
+								return;
+							}
+							alert("인증코드를 이메일로 발송했습니다."); 
+							alert(email.val());
+							//ajax 이메일발송
+							$.ajax({
+								url:"/member/sendEmail",
+								type:"post",
+								data:{"email":email.val()},
+								success:function(data){
+									alert("성공");
+									console.log(data);
+								},
+								error:function(){
+									alert("이메일 발송 실패");
+								}
+								
+								
+							});//ajax
+							
+							
+						 });//emailbtn 
+					  });//jquery
+					</script>
+					
 					<!-- Btn Area -->
-					<div class="btnAreaCenter">
-						<a href="#" class="gbtn">휴대폰인증</a></li>
+					<div class="btnArea">
+						<div class="bCenter">
+							<ul>																
+								<li><a class="nbtnbig">인증코드 발송</a></li>
+								<li><a href="#" class="sbtnMini">다음으로</a></li>
+							</ul>
+						</div>
 					</div>
 					<!-- //Btn Area -->
 
