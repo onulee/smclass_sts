@@ -173,7 +173,7 @@ if("${param.loginChk}"=="0"){
 				<ul>
 					<li><a href="event/event">EVENT</a></li>
 					<li><a href="/customer/notice">CUSTOMER</a></li>
-					<li><a href="#">COMMUNITY</a></li>
+					<li><a href="/community/epilogue">COMMUNITY</a></li>
 				</ul>
 			</div>
 			<div id="snb">
