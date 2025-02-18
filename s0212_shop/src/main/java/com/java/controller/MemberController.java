@@ -25,6 +25,11 @@ public class MemberController {
 	public String step01() {
 		return "member/step01";
 	}
+	@GetMapping("/member/step02") //회원가입2
+	public String step02() {
+		session.removeAttribute("pwCode"); //섹션삭제
+		return "member/step02";
+	}
 	
 	@ResponseBody //이메일 발송 - text
 	@PostMapping("/member/sendEmail")
@@ -40,7 +45,21 @@ public class MemberController {
 	public String sendEmail2(String email) {
 		System.out.println("sendEmail2 : "+email);
 		String pwCode = memberService.sendEmail2(email); //email발송-html
+		session.setAttribute("pwCode", pwCode);
 		return pwCode;
+		
+	}
+	
+	@ResponseBody // 인증코드 확인
+	@PostMapping("/member/pwCodeCheck")
+	public String pwCodeCheck(String pwCode) {
+		System.out.println("pwCodeCheck pwCode : "+pwCode);
+		String pw = (String)session.getAttribute("pwCode");
+		if(pwCode.equals(pw)) {
+			return "1";
+		}else {
+			return "0";
+		}
 		
 	}
 	

@@ -187,7 +187,7 @@ if("${param.loginChk}"=="0"){
 						<li>${session_id} 님</li>
 						<li><a href="/member/logout">LOGOUT</a></li>
 					</c:if>
-					<li><a href="#">MY PAGE</a></li>
+					<li><a href="/mypage/ordercheck">MY PAGE</a></li>
 					<li><a href="#">CART</a></li>
 				</ul>
 
