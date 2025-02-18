@@ -96,11 +96,7 @@ $(document).ready(function() {
 	<div id="header">
 		
 		<div id="snbBox">
-			<h1>
-			<a href="/">
-			  <img src="../images/txt/logo.gif" alt="JARDIN SHOP" />
-			</a>
-			</h1>
+			<h1><a href="/"><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></a></h1>
 			<div id="quickmenu">
 				<div id="mnaviOpen"><img src="../images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
 				<div id="mnaviClose"><img src="../images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>

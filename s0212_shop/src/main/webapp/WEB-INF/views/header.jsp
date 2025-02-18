@@ -16,7 +16,6 @@
 <link rel="stylesheet" type="text/css" href="../css/content.css?v=Y" />
 <script type="text/javascript" src="../js/jquery.min.js"></script>
 <script type="text/javascript" src="../js/top_navi.js"></script>
-<script type="text/javascript" src="../js/left_navi.js"></script>
 <script type="text/javascript" src="../js/main.js"></script>
 <script type="text/javascript" src="../js/common.js"></script>
 <script type="text/javascript" src="../js/jquery.easing.1.3.js"></script>
@@ -30,9 +29,83 @@
 <script type="text/javascript">
 $(document).ready(function() {
 	
+	var mySwiper = new Swiper('#mainRoll',{
+		pagination: '#mainThum',
+		paginationClickable: true,
+		slidesPerView: 1,
+		loop: true,
+		autoplay:5000
+	});
+
+	var mySwiper2 = new Swiper('#bestseller',{
+		paginationClickable: true,
+		slidesPerView: 3,
+		loop: true,
+		autoplay:3000
+	});
+
+	var mySwiper3 = new Swiper('#mainSale',{
+		paginationClickable: true,
+		slidesPerView: 5,
+		loop: true,
+		autoplay:3000
+	});
+	
+	$(window).bind('resize', function() {
+		rollwidth();	
+	});
+
+	function rollwidth(){
+		var winWidth = $(window).width();
+		if(winWidth < 768){
+			mySwiper2.params.slidesPerView = 1;
+			mySwiper3.params.slidesPerView = 2;
+		}else{
+			mySwiper2.params.slidesPerView = 3;
+			mySwiper3.params.slidesPerView = 5;
+		}
+	}
+	$('.arrowLeft').bind('click', function(e){
+		e.preventDefault()
+		mySwiper2.swipePrev()
+	});
+	$('.arrowRight').bind('click', function(e){
+		e.preventDefault()
+		mySwiper2.swipeNext()
+	});
+
+	$('.saleLeft').bind('click', function(e){
+		e.preventDefault()
+		mySwiper3.swipePrev()
+	});
+	$('.saleRight').bind('click', function(e){
+		e.preventDefault()
+		mySwiper3.swipeNext()
+	});
+
+	rollwidth();
+
+
+	var myWish = new Swiper('#wishList',{
+		paginationClickable: true,
+		slidesPerView: 3,
+		loop: true,
+		autoplay:3000
+	});
 
 
 });
+
+
+//로그인 여부
+if("${param.loginChk}"=="1"){
+	alert("로그인이 되었습니다.");
+}
+//로그아웃 여부
+if("${param.loginChk}"=="0"){
+	alert("로그아웃 되었습니다.");
+}
+
 </script>
 </head>
 <body>
@@ -94,20 +167,26 @@ $(document).ready(function() {
 	<div id="header">
 		
 		<div id="snbBox">
-			<h1><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></h1>
+			<h1><a href="/"><img src="../images/txt/logo.gif" alt="JARDIN SHOP" /></a></h1>
 			<div id="quickmenu">
 				<div id="mnaviOpen"><img src="../images/btn/btn_mnavi.gif" width="33" height="31" alt="메뉴열기" /></div>
 				<div id="mnaviClose"><img src="../images/btn/btn_mnavi_close.gif" width="44" height="43" alt="메뉴닫기" /></div>
 				<ul>
-					<li><a href="#">EVENT</a></li>
-					<li><a href="#">CUSTOMER</a></li>
-					<li><a href="#">COMMUNITY</a></li>
+					<li><a href="event/event">EVENT</a></li>
+					<li><a href="/customer/notice">CUSTOMER</a></li>
+					<li><a href="/community/epilogue">COMMUNITY</a></li>
 				</ul>
 			</div>
 			<div id="snb">
 				<ul>
-					<li><a href="#">LOGIN</a></li>
-					<li><a href="#">JOIN</a></li>
+					<c:if test="${session_id == null }">
+						<li><a href="/member/login">LOGIN</a></li>
+						<li><a href="/member/step01">JOIN</a></li>
+					</c:if>
+					<c:if test="${session_id != null }">
+						<li>${session_id} 님</li>
+						<li><a href="/member/logout">LOGOUT</a></li>
+					</c:if>
 					<li><a href="#">MY PAGE</a></li>
 					<li><a href="#">CART</a></li>
 				</ul>
@@ -186,185 +265,3 @@ $(document).ready(function() {
 		<script type="text/javascript">initTopMenu();</script>
 	</div>
 	<!-- //GNB -->
-
-	<!-- container -->
-	<div id="container">
-
-		<div id="location">
-			<ol>
-				<li><a href="#">HOME</a></li>
-				<li><a href="#">MEMBERSHIP</a></li>
-				<li class="last">회원가입</li>
-			</ol>
-		</div>
-		
-		<div id="outbox">		
-			<div id="left">
-				<div id="title2">MEMBERSHIP<span>멤버쉽</span></div>
-				<ul>	
-					<li><a href="#" id="leftNavi1">로그인</a></li>
-					<li><a href="#" id="leftNavi2">회원가입</a></li>
-					<li><a href="#" id="leftNavi3">아이디/<span>비밀번호 찾기</span></a></li>
-					<li><a href="#" id="leftNavi4">회원약관</a></li>
-					<li><a href="#" id="leftNavi5">개인정보<span>취급방침</span></a></li>
-					<li class="last"><a href="#" id="leftNavi6">이메일무단<span>수집거부</span></a></li>
-				</ul>			
-			</div><script type="text/javascript">initSubmenu(2,0);</script>
-
-
-			<!-- contents -->
-			<div id="contents">
-				<div id="member">
-					<h2><strong>회원가입</strong><span>회원으로 가입하시면 보다 더 다양한 혜택을 누리실 수 있습니다.</span></h2>
-					
-					<!-- STEP -->
-					<div class="stepWrap">
-						<div class="step stepon">
-							<p class="web">STEP 01</p>
-							<p class="txt">실명확인</p>
-							<p class="ck"><img src="../images/bg/bg_step.png" alt="현재위치" /></p>
-						</div>
-
-						<div class="step">
-							<p class="web">STEP 02</p>
-							<p class="txt">약관 동의</p>
-						</div>
-
-						<div class="step">
-							<p class="web">STEP 03</p>
-							<p class="txt"><span>회원정보</span> <span>입력</span></p>
-						</div>
-
-						<div class="step">
-							<p class="web">STEP 04</p>
-							<p class="txt"><span>회원가입</span> <span>완료</span></p>
-						</div>
-					</div>
-					<!-- //STEP -->
-						
-
-					<div class="alertBox">
-						<ul>
-							<li>회원님의 실명확인 및 가입 여부를 확인하는 절차입니다.</li>
-							<li>회원님의 개인 정보 보호를 위해 실명확인을 실시하고 있습니다.</li>
-						</ul>
-					</div>
-					
-					<!-- table추가 -->
-					<div class="checkDivTab">
-						<table summary="분류, 구매여부, 평가, 제목, 상세 내용 순으로 상품평을 작성 하실수 있습니다." class="checkTable" border="1" cellspacing="0">
-							<caption>상품평 작성</caption>
-							<colgroup>
-							<col width="25%" class="tw30" />
-							<col width="*" />
-							</colgroup>
-							<tbody>
-								<tr>
-									<th scope="row"><span>이메일주소 입력</span></th>
-									<td>
-										<input type="text" class="wlong" name="email" />
-									</td>
-								</tr>
-								<tr>
-									<th scope="row"><span>인증코드</span></th>
-									<td>
-										<input type="text" class="wlong" readonly />
-									</td>
-								</tr>
-															
-							</tbody>
-						</table>
-					</div>
-
-					<script>
-					  $(function(){
-						 $(".nbtnbig").click(()=>{
-							let email = $('input[name="email"]');
-							if(email.val().length<1){
-								alert("이메일을 입력하셔야 합니다.");
-								return;
-							}
-							alert("인증코드를 이메일로 발송했습니다."); 
-							alert(email.val());
-							//ajax 이메일발송
-							$.ajax({
-								url:"/member/sendEmail2",
-								type:"post",
-								data:{"email":email.val()},
-								success:function(data){
-									alert("성공");
-									console.log(data);
-								},
-								error:function(){
-									alert("이메일 발송 실패");
-								}
-								
-								
-							});//ajax
-							
-							
-						 });//emailbtn 
-					  });//jquery
-					</script>
-					
-					<!-- Btn Area -->
-					<div class="btnArea">
-						<div class="bCenter">
-							<ul>																
-								<li><a class="nbtnbig">인증코드 발송</a></li>
-								<li><a href="#" class="sbtnMini">다음으로</a></li>
-							</ul>
-						</div>
-					</div>
-					<!-- //Btn Area -->
-
-
-				</div>
-			</div>
-			<!-- //contents -->
-
-
-		</div>
-	</div>
-	<!-- //container -->
-
-
-
-
-	<div id="footerWrap">
-		<div id="footer">
-			<div id="fnb">
-				<ul>
-					<li class="left"><a href="#">개인정보취급방침</a></li>
-					<li><a href="#">이용약관</a></li>
-					<li class="left"><a href="#">이메일무단수집거부</a></li>
-					<li><a href="#">고객센터</a></li>
-					<li class="left brand"><a href="#">쟈뎅 브랜드 사이트</a></li>
-				</ul>
-			</div>
-			
-			<div id="finfo">
-				<div id="flogo"><img src="../images/txt/flogo.gif" alt="JARDIN THE COFFEE CREATOR, SINCE 1984" /></div>
-				<address>
-					<ul>
-						<li>㈜쟈뎅</li>
-						<li>대표자 윤영노</li>
-						<li class="tnone">주소 서울시 강남구 논현동 4-21번지 영 빌딩</li>
-						<li class="webnone">소비자상담실 02)546-3881</li>
-						<li>사업자등록번호 211-81-24727</li>
-						<li class="tnone">통신판매신고 제 강남 – 1160호</li>
-						<li class="copy">COPYRIGHT © 2014 JARDIN <span>ALL RIGHTS RESERVED.</span></li>
-					</ul>
-				</address>
-
-				<div id="inicis"><img src="../images/ico/ico_inicis.png" alt="이니시스 결제시스템" /></div>
-			</div>
-		</div>
-	</div>
-
-
-
-</div>
-</div>
-</body>
-</html>

@@ -26,12 +26,20 @@ public class MemberController {
 		return "member/step01";
 	}
 	
-	@ResponseBody //이메일 발송
+	@ResponseBody //이메일 발송 - text
 	@PostMapping("/member/sendEmail")
 	public String sendEmail(String email) {
 		System.out.println("sendEmail : "+email);
-		String pwCode = memberService.sendEmail(email);
-				
+		String pwCode = memberService.sendEmail(email); //email발송-text
+		return pwCode;
+		
+	}
+	
+	@ResponseBody //이메일 발송2 - html
+	@PostMapping("/member/sendEmail2")
+	public String sendEmail2(String email) {
+		System.out.println("sendEmail2 : "+email);
+		String pwCode = memberService.sendEmail2(email); //email발송-html
 		return pwCode;
 		
 	}
@@ -45,12 +53,12 @@ public class MemberController {
 	}
 	
 	@GetMapping("/member/login")
-	public String login(HttpServletResponse response,
-			HttpServletRequest request) {
-		//쿠키생성
-		Cookie cookie = new Cookie("cook_id", "aaa");
-		cookie.setMaxAge(60*10);
-		response.addCookie(cookie);
+	public String login(HttpServletResponse response) {
+		//쿠키 생성 - 자바에서 생성
+//		Cookie cookie = new Cookie("cook_id", "aaa");
+//		cookie.setMaxAge(60*60*24); //1일
+//		response.addCookie(cookie); //cookie저장
+		
 		return "member/login";
 	}
 	
