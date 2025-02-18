@@ -38,7 +38,7 @@
 	      <tr>
 	        <td>${mdto.id }</td>
 	        <td>${mdto.pw }</td>
-	        <td>${mdto.name }</td>
+	        <a href="/memberInfo?id=${mdto.id}"><td>${mdto.name }</td></a>
 	        <td>${mdto.phone }</td>
 	        <td>${mdto.gender }</td>
 	        <td>${mdto.hobby }</td>
