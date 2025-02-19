@@ -44,4 +44,10 @@ public class MemberServiceImpl implements MemberService {
 		return memberDto;
 	}
 
+	@Override
+	public void deleteById(String id) {
+		memberRepository.deleteById(id);
+		
+	}
+
 }

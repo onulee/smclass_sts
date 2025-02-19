@@ -14,4 +14,6 @@ public interface MemberService {
 
 	MemberDto findByIdAndPw(String id, String pw);
 
+	void deleteById(String id);
+
 }

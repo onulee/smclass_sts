@@ -33,12 +33,9 @@ public class MemberController {
 		return "login";
 	}
 	
-	@GetMapping("/member")
-	public String member() {
-		return "member";
-	}
 	
-	@GetMapping("/memberInfo")
+	
+	@GetMapping("/memberInfo") //회원상세페이지
 	public String memberInfo(String id,Model model) {
 		MemberDto memberDto = memberService.findById(id);
 		model.addAttribute("mdto",memberDto);
@@ -53,7 +50,34 @@ public class MemberController {
 		return "mlist";
 	}
 	
-	@PostMapping("/member")
+	@GetMapping("/memUpdate") //회원수정페이지
+	public String memUpdate(String id, Model model) {
+		MemberDto memberDto = memberService.findById(id);
+		model.addAttribute("mdto",memberDto);
+		return "memUpdate";
+	}
+	@PostMapping("/memUpdate") //회원수정완료
+	public String memUpdate(MemberDto mdto) {
+		MemberDto memberDto = memberService.findById(mdto.getId());
+		memberDto.setPhone(mdto.getPhone());
+		memberDto.setGender(mdto.getGender());
+		memberDto.setHobby(mdto.getHobby());
+		memberService.save(memberDto);
+		return "redirect:/mlist";
+	}
+	
+	@GetMapping("/memDelete") //회원수정완료
+	public String memDelete(String id) {
+		memberService.deleteById(id);
+		return "redirect:/mlist";
+	}
+	
+	@GetMapping("/member") //회원가입페이지
+	public String member() {
+		return "member";
+	}
+	
+	@PostMapping("/member") //회원가입완료
 	public String member(MemberDto mdto) {
 		System.out.println("mdto id : "+mdto.getId());
 		MemberDto memberDto = memberService.save(mdto);

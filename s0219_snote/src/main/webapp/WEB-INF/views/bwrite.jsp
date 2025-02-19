@@ -11,10 +11,13 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/write.css">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <!-- include libraries(jQuery, bootstrap) -->
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 
-	<!-- include summernote css/js -->
-	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
-	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+  <!-- include summernote css/js -->
+  <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
  <script>
  $(function(){
@@ -57,11 +60,7 @@
 				    }
 				  }
 				} //callbacks 
-			
  	});
- 	
-    
- 	
  });//jquery
  
 //summernote Form데이터 이미지 추가 - file
