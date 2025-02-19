@@ -40,8 +40,8 @@ public class FController {
 		return "bwrite";
 	}
 	
-	@PostMapping("summernoteUpload")
-	@ResponseBody
+	@PostMapping("/summernoteUpload")
+	@ResponseBody //ajax
 	public String bwrite_upload(@RequestPart MultipartFile file) throws Exception {
 		String realFileName = "";
 		String url = "";
@@ -54,7 +54,7 @@ public class FController {
 			File f = new File(url+realFileName); //파일객체 생성
 			file.transferTo(f); //파일올리기
 		}
-		
+		System.out.println("링크파일 주소 : /upload/board/"+realFileName);
 		return "/upload/board/"+realFileName;
 	}
 	

@@ -11,9 +11,7 @@
   <link rel="stylesheet" href="css/style.css">
   <link rel="stylesheet" href="css/write.css">
   <script src="http://code.jquery.com/jquery-latest.min.js"></script>
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" rel="stylesheet">
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-	
+
 	<!-- include summernote css/js -->
 	<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 	<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
@@ -21,14 +19,14 @@
  <script>
  $(function(){
  	$('#summernote').summernote({
- 		 height: 500,       // 최초 글쓰기 높이
- 		 minHeight: 500,    // 최소 높이
- 		 maxHeight: 500,    // 최대 높이
- 		 focus: true,       // set focus to editable area after initializing summernote
- 		 lang:"ko-KR",
- 		 placeholder:"최대 2000자까지 입력할 수 있습니다.",
- 	      //  추가 부분
-          toolbar: [
+ 		 height: 400,       // 최초 글쓰기 높이
+		 minHeight: 400,    // 최소 높이
+		 maxHeight: 400,    // 최대 높이
+		 focus: true,       // set focus to editable area after initializing summernote
+		 lang:"ko-KR",
+		 placeholder:"최대 2000자까지 입력할 수 있습니다.",
+	      //  추가 부분
+         toolbar: [
 			// [groupName, [list of button]]
 			['fontname', ['fontname']], //글꼴 설정
 			['fontsize', ['fontsize']], //글자 크기
@@ -58,13 +56,16 @@
 				        }
 				    }
 				  }
-				} //callbacks
+				} //callbacks 
 			
  	});
+ 	
+    
+ 	
  });//jquery
  
- //summernote Form데이터 이미지 추가 - file
- function uploadFile(file,this_editor){
+//summernote Form데이터 이미지 추가 - file
+function uploadFile(file,this_editor){
  	var form_data = new FormData(); //form객체선언
  	form_data.append("file",file);
  	
@@ -84,18 +85,8 @@
  		error:function(){
  			alert("실패");
  		}
- 		
- 		
- 		
- 		
  	});//ajax
- 	
- 	
- 	
- 	
  }//uploadFile
- 
- 
  
 </script>
   
