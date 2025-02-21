@@ -28,7 +28,7 @@ public class MemberController {
 		memberDto.setHobby(mdto.getHobby());
 		memberService.save(mdto); // id가 존재하면 update실행, id가 존재하지 않으면 save실행
 		
-		return "memUpdate";
+		return "redirect:/mlist";
 	}
 	
 	@GetMapping("/memUpdate") //회원정보수정페이지
