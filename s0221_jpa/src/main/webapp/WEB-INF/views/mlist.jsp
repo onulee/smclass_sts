@@ -26,7 +26,7 @@
 	      <col width="15%">
 	    </colgroup>
 	    <tr>
-	      <th>아이디1</th>
+	      <th>아이디</th>
 	      <th>패스워드</th>
 	      <th>이름</th>
 	      <th>전화번호</th>
@@ -36,9 +36,7 @@
 	    </tr>
 	    <c:forEach items="${list}" var="mdto">
 	      <tr>
-	        <td>
-	        <a href="/memInfo?id=${mdto.id }">${mdto.id }</a>
-	        </td>
+	        <td><a href="/memInfo?id=${mdto.id }">${mdto.id }</a></td>
 	        <td>${mdto.pw }</td>
 	        <td>${mdto.name }</td>
 	        <td>${mdto.phone }</td>
