@@ -11,5 +11,9 @@ public interface MemberService {
 	List<MemberDto> findAll();
 	//회원정보 1명
 	MemberDto findById(String id);
+	//회원정보삭제
+	void deleteById(String id);
+	//로그인
+	MemberDto findByIdAndPw(String id, String pw);
 
 }

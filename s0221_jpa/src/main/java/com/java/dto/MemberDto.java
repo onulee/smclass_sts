@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 
 import org.hibernate.annotations.ColumnDefault;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -17,6 +19,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data 
+@DynamicInsert // 데이터값이 null경우 컬럼에서 제외
 @Entity //jpa자동생성 - memberdto테이블 : 컬럼 생성, varchar2(50)
 public class MemberDto {
 	
@@ -29,11 +32,12 @@ public class MemberDto {
 	private String name;
 	@Column(length=20)
 	private String phone;
-	@ColumnDefault(" '남자' ")
+	@ColumnDefault("'남자'")
 	private String gender;
 	@Column(length=100)
 	private String hobby;
-	@CreationTimestamp //시간자동입력 - sysdate
+	//@CreationTimestamp //최초간자동입력 - sysdate
+	@UpdateTimestamp //업데이트 시간 추가
 	private Timestamp mdate;
 	
 

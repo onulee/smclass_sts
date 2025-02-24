@@ -14,7 +14,7 @@
 		</style>
 	</head>
 	<body>
-	  <h2>게시판리스트</h2>
+	  <h2>게시판뷰페이지</h2>
 	  <table>
 	    <colgroup>
 	      <col width="10%">
@@ -30,15 +30,13 @@
 	      <th>작성일</th>
 	      <th>조회수</th>
 	    </tr>
-	    <c:forEach items="${list}" var="bdto">
 	      <tr>
 	        <td>${bdto.bno }</td>
-	        <td><a href="/bview?bno=${bdto.bno}">${bdto.btitle }</a></td>
+	        <td><a href="/">${bdto.btitle }</a></td>
 	        <td>${bdto.memberDto.id }</td>
 	        <td>${bdto.bdate }</td>
-	        <td>${bdto.bfile }</td>
+	        <td>${bdto.bhit }</td>
 	      </tr>
-	    </c:forEach>
 	    
 	  </table>
 	  

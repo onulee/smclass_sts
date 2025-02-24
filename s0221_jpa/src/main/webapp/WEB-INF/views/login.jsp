@@ -6,15 +6,9 @@
 		<meta charset="UTF-8">
 		<title>로그인</title>
 		<script>
-		  if("${chkLogin}"=="0"){
+		  if("${param.loginChk}"=="0"){
 			  alert("아이디 또는 패스워드가 일치하지 않습니다. 다시 로그인해주세요.");
 		  }
-		  
-		  if("${session_id}" != ""){
-			  alert("로그인이 되었습니다.");
-			  location.href = "/";
-		  }
-		  
 		</script>
 	</head>
 	<body>

@@ -8,14 +8,50 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.dto.MemberDto;
 import com.java.service.MemberService;
+
+import jakarta.servlet.http.HttpSession;
+
 
 @Controller
 public class MemberController {
 
 	@Autowired MemberService memberService;
+	@Autowired HttpSession session;
+	
+	@PostMapping("/login") //로그인페이지
+	public String login(String id,String pw) {
+		MemberDto memberDto = memberService.findByIdAndPw(id,pw);
+		if(memberDto != null) {
+			System.out.println("로그인이 되었습니다.");
+			session.setAttribute("session_id", id);
+			return "redirect:/";
+		}else {
+			System.out.println("로그인이 되지 않았습니다.");
+		}
+		return "redirect:/login?loginChk=0";
+	}
+	
+	@GetMapping("/login") //로그인페이지
+	public String login() {
+		return "login";
+	}
+	
+	
+	
+	
+	@ResponseBody
+	@PostMapping("/memDelete") //회원정보수정 저장
+	public String memDelete(String id) {
+		//회원정보삭제
+		System.out.println("id : "+id);
+		memberService.deleteById(id);
+		
+		return "1";
+	}
 	
 	@PostMapping("/memUpdate") //회원정보수정 저장
 	public String memUpdate(MemberDto mdto,Model model) {
@@ -26,6 +62,7 @@ public class MemberController {
 		memberDto.setPhone(mdto.getPhone());
 		memberDto.setGender(mdto.getGender());
 		memberDto.setHobby(mdto.getHobby());
+		memberDto.setMdate(memberDto.getMdate()); //날짜 확인
 		memberService.save(mdto); // id가 존재하면 update실행, id가 존재하지 않으면 save실행
 		
 		return "redirect:/mlist";

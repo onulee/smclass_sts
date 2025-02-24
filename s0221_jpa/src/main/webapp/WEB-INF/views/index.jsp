@@ -13,11 +13,11 @@
 	 <div>섹션아이디 : ${session_id }</div>
 	 <div>섹션이름 : ${session_name } 님 환영합니다.</div>
 	 <ul>
+		   <li><a href="/blist">게시판</a></li>
+		   <li><a href="/login">로그인</a></li>
 		   <li><a href="/member">회원가입</a></li>
 		   <li><a href="/mlist">회원리스트</a></li>
-		   <li><a href="/member/login">로그인</a></li>
 		   <li><a href="/member/logout">로그아웃</a></li>
-		   <li><a href="/board/blist">게시판</a></li>
 		   <li><a href="/board/boardWrite">글쓰기</a></li>
 		   <hr>
 		   <li><a href="/board/bview?bno=2">게시글보기</a></li>

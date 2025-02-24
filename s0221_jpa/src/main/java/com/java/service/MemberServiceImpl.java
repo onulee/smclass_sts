@@ -16,7 +16,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override //회원가입
 	public void save(MemberDto mdto) {
 		memberRepository.save(mdto); //자동으로 저장, mapper.xml
-		
 	}
 
 	@Override
@@ -27,7 +26,6 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public MemberDto findById(String id) {
-		
 		//findById -> 검색이 없을 경우 에러처리를 해야 함.
 		// select * from memberdto where id = #{id}
 		// findByIdAndPw
@@ -36,6 +34,18 @@ public class MemberServiceImpl implements MemberService {
 				.orElseThrow(()->{
 					return new IllegalArgumentException("데이터 처리시 에러!!");
 				});
+		return memberDto;
+	}
+
+	@Override
+	public void deleteById(String id) {
+		memberRepository.deleteById(id);
+		
+	}
+
+	@Override //로그인
+	public MemberDto findByIdAndPw(String id, String pw) {
+		MemberDto memberDto = memberRepository.findByIdAndPw(id,pw);
 		return memberDto;
 	}
 
