@@ -10,6 +10,12 @@ import com.java.dto.BoardDto;
 
 public interface BoardRepository extends JpaRepository<BoardDto, Integer>{
 
+	//select * from boarddto where btitle like '%search%'
+//	@Query(value = "select * from boarddto where btitle like %:search% or bcontent like %:search%",
+//		nativeQuery = true)
+//	List<BoardDto> findByBtitleOrBcontentContaining(String search);
+	List<BoardDto> findByBtitleContaining(String search);
+
 	
 	//Memberdto 로그인부분 쿼리
 //	@Query(value = "select * from memberdto where id=? and pw=?",

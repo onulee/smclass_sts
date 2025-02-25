@@ -46,4 +46,10 @@ public class BoardServiceImpl implements BoardService{
 		return boardDto;
 	}
 
+	@Override //제목검색
+	public List<BoardDto> findByBtitleContaining(String search) {
+		List<BoardDto> list = boardRepository.findByBtitleContaining(search);
+		return list;
+	}
+
 }

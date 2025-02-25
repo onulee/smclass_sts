@@ -45,7 +45,7 @@ public class CboardDto {
 	@UpdateTimestamp
 	private Timestamp cdate;
 	
-	@OneToMany(mappedBy = "BoardDto")
-	private List<CboardDto> cboardDto;
+//	@OneToMany(mappedBy = "BoardDto")
+//	private List<CboardDto> cboardDto;
 	
 }
