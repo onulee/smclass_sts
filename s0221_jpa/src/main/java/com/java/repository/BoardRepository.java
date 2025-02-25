@@ -2,6 +2,7 @@ package com.java.repository;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
@@ -15,7 +16,7 @@ public interface BoardRepository extends JpaRepository<BoardDto, Integer>{
 //			nativeQuery = true)
 //	Optional<MemberDto> findByIdAndPw(String id,String pw);
 	
-	@Query(value = "select * from boarddto order by bgroup desc, bstep asc",
-			nativeQuery = true)
-	List<BoardDto> findAll();
+//	@Query(value = "select * from boarddto order by bgroup desc, bstep asc",
+//			nativeQuery = true)
+//	Page<BoardDto> findAll(pageable);
 }
