@@ -60,6 +60,10 @@ public class BoardDto {
 	@Column(nullable = true,length=100)
 	private String bfile;
 	
-	
+	//CboardDto의 boardDto 컬럼을 넣어줌 (BoardDto boardDto 이름을 가져옴)
+	//mappedBy연관관계 주인이 아님. - FK를 생성하지 마라.
+	// 테이블을 조인해서 가져오는 것만 하면 됨.
+	@OneToMany(mappedBy = "boardDto",fetch = FetchType.EAGER) 
+	private List<CboardDto> clist;
 
 }

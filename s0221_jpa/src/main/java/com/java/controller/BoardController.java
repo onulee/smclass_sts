@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.java.dto.BoardDto;
+import com.java.dto.CboardDto;
 import com.java.service.BoardService;
 
 @Controller
@@ -63,7 +64,10 @@ public class BoardController {
 	@GetMapping("/bview")
 	public String bview(int bno,Model model) {
 		BoardDto boardDto = boardService.findById(bno);
+		System.out.println("clist : "+boardDto.getClist().size());
+		List<CboardDto> clist = boardDto.getClist();
 		model.addAttribute("bdto",boardDto);
+		model.addAttribute("clist",clist);
 		return "bview";
 	}
 	
@@ -73,7 +77,7 @@ public class BoardController {
 	public String bsearch(String search,Model model) {
 		// 1. List<BoardDto> list = boardService.findByBtitle(search);
 		System.out.println("controller search : "+search);
-		List<BoardDto> list = boardService.findByBtitleContaining(search);
+		List<BoardDto> list = boardService.findByBtitleContains(search);
 		System.out.println("list : "+list.size());
 		model.addAttribute("list",list);
 		return "blist";

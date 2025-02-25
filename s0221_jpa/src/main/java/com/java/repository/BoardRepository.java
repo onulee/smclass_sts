@@ -14,7 +14,7 @@ public interface BoardRepository extends JpaRepository<BoardDto, Integer>{
 //	@Query(value = "select * from boarddto where btitle like %:search% or bcontent like %:search%",
 //		nativeQuery = true)
 //	List<BoardDto> findByBtitleOrBcontentContaining(String search);
-	List<BoardDto> findByBtitleContaining(String search);
+	List<BoardDto> findByBtitleContains(String search);
 
 	
 	//Memberdto 로그인부분 쿼리
