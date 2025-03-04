@@ -18,6 +18,8 @@ public interface MemberService {
 	List<MemberDto> memberList();
 	//리엑트 회원1명
 	MemberDto memberView(String id);
+	//리엑트 회원정보저장
+	MemberDto memberInsert(MemberDto mdto);
 
 
 }

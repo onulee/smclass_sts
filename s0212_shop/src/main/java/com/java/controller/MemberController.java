@@ -43,6 +43,15 @@ public class MemberController {
 		MemberDto memberDto = memberService.memberView(id);
 		return memberDto;
 	}
+	// 회원정보 저장
+	@CrossOrigin 
+	@ResponseBody // 인증코드 확인
+	@PostMapping("/member/memberInsert")
+	public MemberDto memberInsert(@RequestBody MemberDto mdto) {
+		System.out.println("memberInsert mdto id : "+mdto.getId());
+		MemberDto memberDto = memberService.memberInsert(mdto);
+		return memberDto;
+	}
 	
 	
 	

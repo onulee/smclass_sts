@@ -15,5 +15,7 @@ public interface MemberMapper {
 	List<MemberDto> selectAll();
 	//리엑트 회원1명 
 	MemberDto selectOne(String id);
+	//리엑트 회원정보저장
+	void insert(MemberDto mdto);
 
 }

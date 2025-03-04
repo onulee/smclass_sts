@@ -110,6 +110,13 @@ public class MemberServiceImpl implements MemberService {
 		MemberDto memberDto = memberMapper.selectOne(id);
 		return memberDto;
 	}
+
+	@Override //리엑트 회원정보저장
+	public MemberDto memberInsert(MemberDto mdto) {
+		memberMapper.insert(mdto);
+		MemberDto memberDto = memberMapper.selectOne(mdto.getId());
+		return memberDto;
+	}
 	
 	
 

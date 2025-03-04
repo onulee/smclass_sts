@@ -14,6 +14,12 @@
   <select id="selectOne" resultType="com.java.dto.MemberDto">
     select * from member where id=#{id}
   </select>
+  <!-- 리엑트 : 회원정보저장 -->
+  <select id="insert" >
+    insert into member values(
+	#{id},#{pw},#{name},#{phone},#{gender},#{hobby},sysdate
+	)
+  </select>
   
   
 
