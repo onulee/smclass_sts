@@ -2,6 +2,8 @@ package com.java.service;
 import com.java.dao.MemberMapper;
 import com.java.dto.MemberDto;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import jakarta.mail.MessagingException;
@@ -95,6 +97,18 @@ public class MemberServiceImpl implements MemberService {
 		}
 		System.out.println("임시비밀번호 생성 : "+pwCode);
 		return pwCode;
+	}
+
+	@Override //리엑트 회원전체가져오기
+	public List<MemberDto> memberList() {
+		List<MemberDto> list = memberMapper.selectAll();
+		return list;
+	}
+
+	@Override //리엑트 회원1명
+	public MemberDto memberView(String id) {
+		MemberDto memberDto = memberMapper.selectOne(id);
+		return memberDto;
 	}
 	
 	

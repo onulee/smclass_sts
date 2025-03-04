@@ -6,6 +6,14 @@
   <select id="selectLogin" resultType="com.java.dto.MemberDto">
     select * from member where id=#{id} and pw=#{pw}
   </select>
+  <!-- 리엑트 : 회원전체 가져오기 -->
+  <select id="selectAll" resultType="com.java.dto.MemberDto">
+    select * from member
+  </select>
+  <!-- 리엑트 : 회원 1명 -->
+  <select id="selectOne" resultType="com.java.dto.MemberDto">
+    select * from member where id=#{id}
+  </select>
   
   
 
