@@ -37,7 +37,7 @@ public class EventController {
 	@Autowired EventService eventService;
 	@Autowired MemberService memberService;
 	
-	
+	//하단넘버링 구현
 	@GetMapping("/event/event")
 	public String event(
 			@PageableDefault(page=0,size=10)
