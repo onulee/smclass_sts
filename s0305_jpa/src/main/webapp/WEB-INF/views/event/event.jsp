@@ -56,14 +56,49 @@
 					<div class="btnAreaList">
 						<!-- 페이징이동1 -->
 						<div class="allPageMoving1">
-
-						<a href="#" class="n"><img src="../images/btn/btn_pre2.gif" alt="처음으로"/></a><a href="#" class="pre"><img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/></a>
-						<strong>1</strong>
-						<a href="#">2</a>
-						<a href="#">3</a>
-						<a href="#">4</a>
-						<a href="#">5</a>
-						<a href="#" class="next"><img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/></a><a href="#" class="n"><img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/></a>
+						<!-- 처음페이지이동 -->
+						<!-- 이전페이지 이동 -->
+						<c:if test="${page<=0}">
+						  <a class="n">
+							<img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+						  </a>
+						  <a class="pre">
+						   <img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+						  </a>
+						</c:if>
+						<c:if test="${page>0}">
+						    <a href="/event/event?page=${startPage}" class="n">
+							  <img src="../images/btn/btn_pre2.gif" alt="처음으로"/>
+						    </a>
+							<a href="/event/event?page=${page-1}" class="pre">
+							  <img src="../images/btn/btn_pre1.gif" alt="앞페이지로"/>
+							</a>
+						</c:if>
+						<c:forEach begin="${startPage }" end="${endPage }" step="1" var="i">
+						<c:if test="${page==i}">
+						  <strong>${i+1}</strong>
+						</c:if>
+						
+						<c:if test="${page!=i}">
+						  <a href="/event/event?page=${i}">${i+1}</a>
+						</c:if>
+						</c:forEach>
+						<c:if test="${page< maxPage }">
+							<a href="/event/event?page=${page+1}" class="next">
+							  <img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+							</a>
+							<a href="/event/event?page=${maxPage}" class="n">
+							  <img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+							</a>
+						</c:if>
+						<c:if test="${page>= maxPage }">
+							<a class="next">
+							  <img src="../images/btn/btn_next1.gif" alt="뒤페이지로"/>
+							</a>
+							<a class="n">
+							  <img src="../images/btn/btn_next2.gif" alt="마지막페이지로"/>
+							</a>
+						</c:if>
 
 						</div>
 						<!-- //페이징이동1 -->

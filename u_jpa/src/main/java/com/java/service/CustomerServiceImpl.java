@@ -34,7 +34,7 @@ public class CustomerServiceImpl implements CustomerService {
 		return null;
 	}
 
-	@Override //검색
+	@Override //jpa : 검색
 	public List<BoardDto> findByBtitleContains(String btitle) {
 		List<BoardDto> list = boardRepository.findByBtitleContains(btitle);
 		return list;

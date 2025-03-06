@@ -5,7 +5,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.hibernate.query.SortDirection;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
+import org.springframework.data.web.SortDefault;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -33,10 +39,29 @@ public class EventController {
 	
 	
 	@GetMapping("/event/event")
-	public String event(Model model) {
+	public String event(
+			@PageableDefault(page=0,size=10)
+			@SortDefault(sort = "eno",direction = Sort.Direction.DESC)
+			Pageable pageable,
+			Model model) {
 		//전체리스트 가져오기
-		List<EventDto> list = eventService.findAll();
+		Page<EventDto> pages = eventService.findAll(pageable);
+		List<EventDto> list = pages.getContent();
+		//페이지 넘버링
+		int page = pages.getPageable().getPageNumber(); //현재페이지는 0부터 시작이여서 +1
+	    int maxPage = pages.getTotalPages()-1; //마지막 페이지
+	    int startPage = ((page-1)/10)*10;
+	    int endPage = Math.min(startPage+10-1,maxPage);
+		
 		model.addAttribute("list",list);
+		model.addAttribute("page",page);
+		model.addAttribute("maxPage",maxPage);
+		model.addAttribute("startPage",startPage);
+		model.addAttribute("endPage",endPage);
+		System.out.println("page : "+page);
+		System.out.println("maxPage : "+maxPage);
+		System.out.println("startPage : "+startPage);
+		System.out.println("endPage : "+endPage);
 		return "event/event";
 	}
 	@GetMapping("/event/eventWrite") //페이지열기

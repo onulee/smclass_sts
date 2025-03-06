@@ -3,6 +3,8 @@ package com.java.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,10 +17,10 @@ public class EventServiceImpl implements EventService {
 	
 	@Autowired EventRepository eventRepository;
 	
-	@Override
-	public List<EventDto> findAll() {
-		List<EventDto> list = eventRepository.findAll();
-		return list;
+	@Override //
+	public Page<EventDto> findAll(Pageable pageable) {
+		Page<EventDto> page = eventRepository.findAll(pageable);
+		return page;
 	}
 
 	@Override
@@ -35,6 +37,7 @@ public class EventServiceImpl implements EventService {
 		
 	}
 
+	
 	
 
 }
