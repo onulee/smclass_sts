@@ -35,7 +35,16 @@
 							<c:forEach items="${list}" var="edto">
 								<li>
 									<div class="img">
-										<a href="/event/eview?eno=${edto.eno}"><img src="/upload/board/${edto.efile}" alt="진행중 이벤트" /></a>
+										<c:if test="${edto.efile == null }">
+										<a href="/event/eview?eno=${edto.eno}">
+										  <img src="/upload/board/event_04_01.jpg" alt="진행중 이벤트" />
+										</a>
+										</c:if>
+										<c:if test="${edto.efile != null }">
+										<a href="/event/eview?eno=${edto.eno}">
+										  <img src="/upload/board/${edto.efile}" alt="진행중 이벤트" />
+										</a>
+										</c:if>
 									</div>
 									<div class="txt">
 										<div class="subject">${edto.etitle }</div>

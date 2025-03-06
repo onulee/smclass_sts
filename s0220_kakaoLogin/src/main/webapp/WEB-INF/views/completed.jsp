@@ -16,7 +16,7 @@
 </head>
 <body>
 <section>
-    <h1>상품목록</h1>
+    <h1>결제 성공</h1>
 
     <table>
       <colgroup>
@@ -26,14 +26,12 @@
         
       </colgroup>
       <tr>
-        <th colspan="3">구매 상품 안내</th>
+        <th colspan="3">구매 상품 내역</th>
       </tr>
       
       <tr>
         <td colspan="3" class="article">
         상품명 :  카카오 인형 
-        <br/>
-        <img src="/images/kakao1.jpg" width="10%"/>
         </td>
       </tr>
       <tr>
@@ -69,8 +67,9 @@
     	  }
       }
     </script>
-    <div class="list" onclick="buyBtn()" style="background:#00efef;">상품구매</div>
-    <div class="list">취소</div>
+    <a href="/">
+    <div class="list" style="background:#00efef;">메인페이지</div>
+    </a>
   </section>
 </body>
 </html>

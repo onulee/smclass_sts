@@ -24,13 +24,13 @@
 	 <div>섹션아이디 : ${kakaoProfile_id }</div>
 	 <div>섹션이름 : ${kakaoProfile_nickname } 님 환영합니다.</div>
 	 <ul>
-		   <li><a href="/login">로그인</a></li>
+		   <li><a href="/login">카카오로그인</a></li>
+		   <li><a href="/bview">카카오상품결제</a></li>
+		   <hr>
 		   <li><a href="/bwrite">글쓰기</a></li>
-		   <li><a href="/bview?bno=38">상세보기</a></li>
 		   <li><a href="/member/logout">로그아웃</a></li>
 		   <li><a href="/board/blist">게시판</a></li>
 		   <li><a href="/member/member">회원가입</a></li>
-		   <hr>
 		   <li><a href="/board/bview?bno=2">게시글보기</a></li>
 		   <li><a href="/member/mlist">회원리스트</a></li>
 		   <li><a href="/member/memInfo">회원정보</a></li>

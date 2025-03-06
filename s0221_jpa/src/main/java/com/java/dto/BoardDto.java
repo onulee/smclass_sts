@@ -65,5 +65,7 @@ public class BoardDto {
 	// 테이블을 조인해서 가져오는 것만 하면 됨.
 	@OneToMany(mappedBy = "boardDto",fetch = FetchType.EAGER) 
 	private List<CboardDto> clist;
+	
+	
 
 }
