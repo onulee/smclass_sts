@@ -49,6 +49,12 @@ public class FController {
 		return "bview";
 	}
 	
+	//카카오페이성공
+	@GetMapping("/success")
+	public String success() {
+		return "success";
+	}
+	
 	//카카오페이페이지 결제
 	@ResponseBody
 	@PostMapping("/pay/orderPay")
@@ -69,6 +75,7 @@ public class FController {
 	@GetMapping("/pay/completed")
     public String payCompleted(@RequestParam("pg_token") String pgToken) {
     
+		//섹션에서 tid값을 가져옴.
         String tid = SessionUtils.getStringAttributeValue("tid");
         log.info("결제승인 요청을 인증하는 토큰: " + pgToken);
         log.info("결제 고유번호: " + tid);
@@ -78,7 +85,7 @@ public class FController {
 
         System.out.println("승인날짜 : "+approveResponseDto.getApproved_at());
         
-        return "redirect:/pay/completed";
+        return "redirect:/success";
     }
 	
 	//로그인페이지

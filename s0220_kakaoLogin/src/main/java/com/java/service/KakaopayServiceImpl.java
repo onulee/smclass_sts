@@ -44,6 +44,9 @@ public class KakaopayServiceImpl implements KakaopayService {
         //   REST API 호출 이후 응답을 받을 때까지 기다리는 동기 방식 (json, xml 응답)
         RestTemplate template = new RestTemplate();
         String url = "https://open-api.kakaopay.com/online/v1/payment/ready";
+        
+        
+        
         // RestTemplate의 postForEntity : POST 요청을 보내고 ResponseEntity로 결과를 반환받는 메소드
         ResponseEntity<ReadyResponseDto> responseEntity = template.postForEntity(url, requestEntity, ReadyResponseDto.class);
         log.info("결제준비 응답객체: " + responseEntity.getBody());
