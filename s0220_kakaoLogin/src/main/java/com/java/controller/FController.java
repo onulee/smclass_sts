@@ -43,6 +43,7 @@ public class FController {
 		return "index";
 	}
 	
+	//https://myste-leee.tistory.com/272
 	//카카오페이페이지
 	@GetMapping("/bview")
 	public String bview() {
