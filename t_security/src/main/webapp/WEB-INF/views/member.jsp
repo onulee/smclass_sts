@@ -16,7 +16,7 @@
 	    <label>이름</label>
 	    <input type="text" name="name"><br/>
 	    <label>전화번호</label>
-	    <input type="text" name="tel"><br/>
+	    <input type="text" name="phone"><br/>
 	    <label>성별</label><br/>
 	    <input type="radio" id="man" name="gender" value="남자">
 	    <label for="man">남자</label>

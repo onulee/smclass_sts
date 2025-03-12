@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.4.3</version>
-		<relativePath/> <!-- lookup parent from repository -->
+		<version>3.4.2</version>
+		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.java</groupId>
-	<artifactId>u_jpa</artifactId>
+	<artifactId>s0210_02</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>u_jpa</name>
+	<name>s0210_02</name>
 	<description>Demo project for Spring Boot</description>
-	<url/>
+	<url />
 	<licenses>
-		<license/>
+		<license />
 	</licenses>
 	<developers>
-		<developer/>
+		<developer />
 	</developers>
 	<scm>
-		<connection/>
-		<developerConnection/>
-		<tag/>
-		<url/>
+		<connection />
+		<developerConnection />
+		<tag />
+		<url />
 	</scm>
 	<properties>
 		<java.version>17</java.version>
@@ -32,11 +33,12 @@
 	<dependencies>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-data-jpa</artifactId>
+			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter</artifactId>
+			<version>3.0.4</version>
 		</dependency>
 
 		<dependency>
@@ -60,8 +62,13 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
-		
-		
+		<dependency>
+			<groupId>org.mybatis.spring.boot</groupId>
+			<artifactId>mybatis-spring-boot-starter-test</artifactId>
+			<version>3.0.4</version>
+			<scope>test</scope>
+		</dependency>
+
 		<!-- 1. JSP 템플릿 엔진 -->
 		<dependency>
 			<groupId>org.apache.tomcat.embed</groupId>
@@ -90,37 +97,18 @@
 			<version>3.0.1</version>
 		</dependency>
 
-		<!-- 5. log4jdbc 마이바티스 출력 -->
+		<!-- log4jdbc 마이바티스 출력 -->
 		<dependency>
 			<groupId>org.bgee.log4jdbc-log4j2</groupId>
 			<artifactId>log4jdbc-log4j2-jdbc4.1</artifactId>
 			<version>1.16</version>
 		</dependency>
 
-		<!-- 6. 파일업로드 commons-io -->
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-			<version>2.18.0</version>
-		</dependency>
 
-		<!-- email text메일 보냄-->
-		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-mail</artifactId>
-		</dependency>
-
-		<!-- email html메일 보냄-->
-		<dependency>
-			<groupId>javax.mail</groupId>
-			<artifactId>javax.mail-api</artifactId>
-			<version>1.6.2</version>
-		</dependency>
-
-		
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-security</artifactId>
+			<version>3.4.3</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.security</groupId>
@@ -131,7 +119,10 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
+			<version>6.1.5</version>
 		</dependency>
+
+
 	</dependencies>
 
 	<build>
